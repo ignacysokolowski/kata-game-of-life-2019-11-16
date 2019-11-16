@@ -9,27 +9,27 @@ class GameOfLifeTest {
     }
 
     @Test fun `all cells die in a board with a single cell`() {
-        assertThat(Board(listOf(Cell())).nextGeneration(), IsEqual(Board(emptyList())))
+        assertThat(Board(listOf(Cell(0))).nextGeneration(), IsEqual(Board(emptyList())))
     }
 
     @Test fun `all cells die in a board with two cells`() {
-        assertThat(Board(listOf(Cell(), Cell())).nextGeneration(), IsEqual(Board(emptyList())))
+        assertThat(Board(listOf(Cell(0), Cell(1))).nextGeneration(), IsEqual(Board(emptyList())))
     }
 
     @Test fun `cell with two neighbours survives`() {
-        assertThat(Board(listOf(Cell(), Cell(), Cell())).nextGeneration(), IsEqual(Board(listOf(Cell()))))
+        assertThat(Board(listOf(Cell(0), Cell(1), Cell(1))).nextGeneration(), IsEqual(Board(listOf(Cell(1)))))
     }
 }
 
-class Cell {
+class Cell(private val row: Int) {
     override fun toString(): String {
-        return "Cell()"
+        return "Cell($row)"
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-        return true
+        if (other !is Cell) return false
+        return other.row == row
     }
 
     override fun hashCode(): Int {
@@ -41,7 +41,7 @@ class Board(private val cells: List<Cell>) {
 
     fun nextGeneration(): Board {
         if (cells.size == 3) {
-            return Board(listOf(Cell()))
+            return Board(listOf(Cell(1)))
         }
         return Board(emptyList())
     }
