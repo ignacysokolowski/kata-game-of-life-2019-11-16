@@ -5,22 +5,21 @@ import org.junit.Test
 class GameOfLifeTest {
 
     @Test fun `empty board stays empty in the next generation`() {
-        assertThat(emptyBoard().nextGeneration(), IsEqual(emptyBoard()))
+        assertThat(Board().nextGeneration(), IsEqual(Board()))
     }
 
     @Test fun `all cells die in a board with a single cell`() {
-        assertThat(Board(Cell(0)).nextGeneration(), IsEqual(emptyBoard()))
+        assertThat(Board(Cell(0)).nextGeneration(), IsEqual(Board()))
     }
 
     @Test fun `all cells die in a board with two cells`() {
-        assertThat(Board(Cell(0), Cell(1)).nextGeneration(), IsEqual(emptyBoard()))
+        assertThat(Board(Cell(0), Cell(1)).nextGeneration(), IsEqual(Board()))
     }
 
     @Test fun `cell with two neighbours survives`() {
         assertThat(Board(Cell(0), Cell(1), Cell(1)).nextGeneration(), IsEqual(Board(Cell(1))))
     }
 
-    private fun emptyBoard() = Board()
 }
 
 class Cell(private val row: Int) {
