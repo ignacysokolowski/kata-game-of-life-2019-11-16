@@ -7,10 +7,6 @@ class BoardDSLTest {
     @Test fun `creates an empty board`() {
         assertThat(board {}, IsEqual(Board()))
     }
-
-    private fun board(grid: () -> Unit): Board {
-        return Board()
-    }
 }
 
 class GameOfLifeTest {
@@ -76,4 +72,8 @@ class Board(vararg val cells: Cell) {
         return javaClass.hashCode()
     }
 
+}
+
+fun board(grid: () -> Unit): Board {
+    return Board()
 }
