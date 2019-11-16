@@ -7,6 +7,10 @@ class BoardDSLTest {
     @Test fun `creates an empty board`() {
         assertThat(board {}, IsEqual(Board()))
     }
+
+    @Test fun `creates a board with cells`() {
+        assertThat(board { O; O; O }, IsEqual(Board(Cell(0), Cell(1), Cell(2))))
+    }
 }
 
 class GameOfLifeTest {
@@ -74,6 +78,25 @@ class Board(vararg val cells: Cell) {
 
 }
 
-fun board(grid: () -> Unit): Board {
-    return Board()
+fun board(grid: (BoardBuilder.() -> Unit)): Board {
+    return BoardBuilder(grid).build()
+}
+
+class BoardBuilder(private val init: BoardBuilder.() -> Unit) {
+    private var cells = mutableListOf<Cell>()
+    private var row = 0
+
+    fun build(): Board {
+        init()
+        return Board(*cells.toTypedArray())
+    }
+
+    val O
+        get() = addCell()
+
+    private fun addCell(): BoardBuilder {
+        cells.add(Cell(row))
+        row += 1
+        return this
+    }
 }
