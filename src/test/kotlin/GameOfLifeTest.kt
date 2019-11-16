@@ -9,18 +9,18 @@ class GameOfLifeTest {
     }
 
     @Test fun `all cells die in a board with a single cell`() {
-        assertThat(Board(listOf(Cell(0))).nextGeneration(), IsEqual(emptyBoard()))
+        assertThat(Board(Cell(0)).nextGeneration(), IsEqual(emptyBoard()))
     }
 
     @Test fun `all cells die in a board with two cells`() {
-        assertThat(Board(listOf(Cell(0), Cell(1))).nextGeneration(), IsEqual(emptyBoard()))
+        assertThat(Board(Cell(0), Cell(1)).nextGeneration(), IsEqual(emptyBoard()))
     }
 
     @Test fun `cell with two neighbours survives`() {
-        assertThat(Board(listOf(Cell(0), Cell(1), Cell(1))).nextGeneration(), IsEqual(Board(listOf(Cell(1)))))
+        assertThat(Board(Cell(0), Cell(1), Cell(1)).nextGeneration(), IsEqual(Board(Cell(1))))
     }
 
-    private fun emptyBoard() = Board(emptyList())
+    private fun emptyBoard() = Board()
 }
 
 class Cell(private val row: Int) {
@@ -40,6 +40,7 @@ class Cell(private val row: Int) {
 }
 
 class Board(private val cells: List<Cell>) {
+    constructor(vararg cells: Cell) : this(cells.asList())
 
     fun nextGeneration(): Board {
         if (cells.size == 3) {
