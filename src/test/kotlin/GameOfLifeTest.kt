@@ -1,4 +1,5 @@
 import org.hamcrest.core.IsEqual
+import org.hamcrest.core.IsNot.not
 import org.junit.Assert.assertThat
 import org.junit.Test
 
@@ -35,6 +36,17 @@ class GameOfLifeTest {
         assertThat(currentGeneration.nextGeneration(), IsEqual(nextGeneration))
     }
 
+}
+
+class CellTest {
+
+    @Test fun `two equal cells`() {
+        assertThat(Cell(2), IsEqual(Cell(2)))
+    }
+
+    @Test fun `two unequal cells`() {
+        assertThat(Cell(2), not(IsEqual(Cell(3))))
+    }
 }
 
 class Cell(private val row: Int) {
