@@ -16,15 +16,15 @@ class BoardDSLTest {
 class GameOfLifeTest {
 
     @Test fun `empty board stays empty in the next generation`() {
-        assertEvolution(Board(), Board())
+        assertEvolution(board {}, board {})
     }
 
     @Test fun `all cells die in a board with a single cell`() {
-        assertEvolution(Board(Cell(0)), Board())
+        assertEvolution(board { O }, board {})
     }
 
     @Test fun `all cells die in a board with two cells`() {
-        assertEvolution(Board(Cell(0), Cell(1)), Board())
+        assertEvolution(board { O; O }, board {})
     }
 
     @Test fun `cell with two neighbours survives`() {
