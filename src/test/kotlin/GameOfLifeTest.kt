@@ -43,7 +43,7 @@ class Board(private val cells: List<Cell>) {
 
     fun nextGeneration(): Board {
         if (cells.size == 3) {
-            return Board(listOf(Cell(1)))
+            return Board(Cell(1))
         }
         return Board()
     }
