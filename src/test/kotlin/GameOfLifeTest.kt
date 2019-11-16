@@ -45,7 +45,7 @@ class Board(private val cells: List<Cell>) {
         if (cells.size == 3) {
             return Board(listOf(Cell(1)))
         }
-        return Board(emptyList())
+        return Board()
     }
 
     override fun toString(): String {
