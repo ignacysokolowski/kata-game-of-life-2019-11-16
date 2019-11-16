@@ -11,6 +11,10 @@ class GameOfLifeTest {
     @Test fun `all cells die in a board with a single cell`() {
         assertThat(Board(listOf(Cell())).nextGeneration(), IsEqual(Board(emptyList())))
     }
+
+    @Test fun `all cells die in a board with two cells`() {
+        assertThat(Board(listOf(Cell(), Cell())).nextGeneration(), IsEqual(Board(emptyList())))
+    }
 }
 
 class Cell {
