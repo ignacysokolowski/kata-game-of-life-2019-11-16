@@ -2,6 +2,17 @@ import org.hamcrest.core.IsEqual
 import org.junit.Assert.assertThat
 import org.junit.Test
 
+class BoardDSLTest {
+
+    @Test fun `creates an empty board`() {
+        assertThat(board {}, IsEqual(Board()))
+    }
+
+    private fun board(grid: () -> Unit): Board {
+        return Board()
+    }
+}
+
 class GameOfLifeTest {
 
     @Test fun `empty board stays empty in the next generation`() {
@@ -52,7 +63,7 @@ class Board(vararg val cells: Cell) {
     }
 
     override fun toString(): String {
-        return "Board($cells)"
+        return "Board(${cells.asList()})"
     }
 
     override fun equals(other: Any?): Boolean {
