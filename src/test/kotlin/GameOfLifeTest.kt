@@ -40,6 +40,10 @@ class GameOfLifeTest {
 
 class CellTest {
 
+    @Test fun `is alive by default`() {
+        assertThat(Cell(2), IsEqual(Cell(2).alive()))
+    }
+
     @Test fun `two equal cells`() {
         assertThat(Cell(2), IsEqual(Cell(2)))
     }
@@ -62,6 +66,10 @@ class Cell(private val row: Int) {
 
     override fun hashCode(): Int {
         return javaClass.hashCode()
+    }
+
+    fun alive(): Cell {
+        return Cell(row)
     }
 }
 
