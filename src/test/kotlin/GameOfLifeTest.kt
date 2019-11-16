@@ -38,8 +38,7 @@ class Cell(private val row: Int) {
     }
 }
 
-class Board(private val cells: List<Cell>) {
-    constructor(vararg cells: Cell) : this(cells.asList())
+class Board(vararg val cells: Cell) {
 
     fun nextGeneration(): Board {
         if (cells.size == 3) {
@@ -55,7 +54,7 @@ class Board(private val cells: List<Cell>) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Board) return false
-        return other.cells == cells
+        return other.cells.contentEquals(cells)
     }
 
     override fun hashCode(): Int {
