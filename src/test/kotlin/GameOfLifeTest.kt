@@ -70,6 +70,7 @@ class CellTest {
 
     @Test fun `has a neighbour on the left side`() {
         assertThat(Cell(0).leftNeighbour(), IsEqual(Cell(-1)))
+        assertThat(Cell(1).leftNeighbour(), IsEqual(Cell(0)))
     }
 }
 
@@ -97,7 +98,7 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
     }
 
     fun leftNeighbour(): Cell {
-        return Cell(-1)
+        return Cell(row - 1)
     }
 }
 
