@@ -110,15 +110,15 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
     }
 }
 
-class Board(vararg cells: Cell) {
+class Board(private val cells: List<Cell>) {
 
-    private val cells = cells.asList()
+    constructor(vararg cells: Cell) : this(cells.asList())
 
     fun nextGeneration(): Board {
         if (cells.size == 3) {
             return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).dead())
         }
-        return Board(*cells.map { it.dead() }.toTypedArray())
+        return Board(cells.map { it.dead() })
     }
 
     override fun toString(): String {
@@ -147,7 +147,7 @@ class BoardBuilder(private val init: BoardBuilder.() -> Unit) {
 
     fun build(): Board {
         init()
-        return Board(*cells.toTypedArray())
+        return Board(cells)
     }
 
     val O
