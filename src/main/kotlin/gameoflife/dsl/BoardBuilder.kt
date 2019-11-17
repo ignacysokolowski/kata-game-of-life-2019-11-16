@@ -19,7 +19,7 @@ class BoardBuilder(private val init: BoardBuilder.() -> Unit) {
     val X
         get() = addCell(nextCell().dead())
 
-    private fun nextCell() = Cell(column)
+    private fun nextCell() = Cell(column, 0)
 
     private fun addCell(cell: Cell): BoardBuilder {
         cells.add(cell)
