@@ -1,0 +1,23 @@
+stages:
+  - build
+
+Build:
+  stage: build
+  image: maven:3.6.0-jdk-11-slim
+  cache:
+    key: "gradle-v1"
+    paths:
+      - .gradle
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+  script:
+    - ./gradlew build --info
+  artifacts:
+    paths:
+      - build/reports/tests/test
+      - build/test-results/test/TEST-*.xml
+    reports:
+      junit:
+        - build/test-results/test/TEST-*.xml
+  only:
+    - master
