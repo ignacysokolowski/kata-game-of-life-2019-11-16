@@ -5,6 +5,9 @@ class Cells(private val cells: List<Cell>) {
 
     fun allDead() = Cells(cells.map { it.dead() })
 
+    fun onlyExistingIn(other: Cells) =
+        Cells(cells.filter { other.cells.contains(it) })
+
     override fun toString() = "Cells(${cells})"
 
     override fun equals(other: Any?): Boolean {
