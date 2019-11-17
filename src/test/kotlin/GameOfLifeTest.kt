@@ -1,4 +1,5 @@
 import gameoflife.Cell
+import gameoflife.Cells
 import org.hamcrest.core.IsEqual
 import org.hamcrest.core.IsNot.not
 import org.junit.Assert.assertThat
@@ -72,28 +73,6 @@ class CellTest {
     @Test fun `has neighbours on the left and right`() {
         assertThat(Cell(1).neighbours(), IsEqual(setOf(Cell(0), Cell(2))))
         assertThat(Cell(2).neighbours(), IsEqual(setOf(Cell(1), Cell(3))))
-    }
-}
-
-class Cells(private val cells: List<Cell>) {
-    fun size() = cells.size
-
-    fun allDead(): Cells {
-        return Cells(cells.map { it.dead() })
-    }
-
-    override fun toString(): String {
-        return "Cells(${cells})"
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Cells) return false
-        return other.cells == cells
-    }
-
-    override fun hashCode(): Int {
-        return javaClass.hashCode()
     }
 }
 
