@@ -132,12 +132,12 @@ class BoardBuilder(private val init: BoardBuilder.() -> Unit) {
     }
 
     val O
-        get() = addCell(nextCell(alive = true))
+        get() = addCell(nextCell().alive())
 
     val X
-        get() = addCell(nextCell(alive = false))
+        get() = addCell(nextCell().dead())
 
-    private fun nextCell(alive: Boolean) = Cell(row, alive)
+    private fun nextCell() = Cell(row)
 
     private fun addCell(cell: Cell): BoardBuilder {
         cells.add(cell)
