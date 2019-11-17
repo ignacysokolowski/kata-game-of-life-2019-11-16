@@ -110,7 +110,9 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
     }
 }
 
-class Board(vararg val cells: Cell) {
+class Board(vararg cells: Cell) {
+
+    private val cells = cells.asList()
 
     fun nextGeneration(): Board {
         if (cells.size == 3) {
@@ -120,13 +122,13 @@ class Board(vararg val cells: Cell) {
     }
 
     override fun toString(): String {
-        return "Board(${cells.asList()})"
+        return "Board(${cells})"
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Board) return false
-        return other.cells.contentEquals(cells)
+        return other.cells == cells
     }
 
     override fun hashCode(): Int {
