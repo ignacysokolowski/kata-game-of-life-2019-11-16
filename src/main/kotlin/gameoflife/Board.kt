@@ -11,9 +11,7 @@ class Board(private val cells: Cells) {
         return Board(cells.allDead())
     }
 
-    override fun toString(): String {
-        return "Board(${cells})"
-    }
+    override fun toString() = "Board(${cells})"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -21,8 +19,6 @@ class Board(private val cells: Cells) {
         return other.cells == cells
     }
 
-    override fun hashCode(): Int {
-        return javaClass.hashCode()
-    }
+    override fun hashCode() = javaClass.hashCode()
 
 }
