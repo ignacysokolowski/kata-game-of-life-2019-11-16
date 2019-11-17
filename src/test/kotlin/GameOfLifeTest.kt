@@ -1,6 +1,6 @@
 import gameoflife.Board
 import gameoflife.Cell
-import gameoflife.Cells
+import gameoflife.dsl.board
 import org.hamcrest.core.IsEqual
 import org.hamcrest.core.IsNot.not
 import org.junit.Assert.assertThat
@@ -74,33 +74,5 @@ class CellTest {
     @Test fun `has neighbours on the left and right`() {
         assertThat(Cell(1).neighbours(), IsEqual(setOf(Cell(0), Cell(2))))
         assertThat(Cell(2).neighbours(), IsEqual(setOf(Cell(1), Cell(3))))
-    }
-}
-
-fun board(grid: (BoardBuilder.() -> Unit)): Board {
-    return BoardBuilder(grid).build()
-}
-
-class BoardBuilder(private val init: BoardBuilder.() -> Unit) {
-    private var cells = mutableListOf<Cell>()
-    private var row = 0
-
-    fun build(): Board {
-        init()
-        return Board(Cells(cells))
-    }
-
-    val O
-        get() = addCell(nextCell().alive())
-
-    val X
-        get() = addCell(nextCell().dead())
-
-    private fun nextCell() = Cell(row)
-
-    private fun addCell(cell: Cell): BoardBuilder {
-        cells.add(cell)
-        row += 1
-        return this
     }
 }
