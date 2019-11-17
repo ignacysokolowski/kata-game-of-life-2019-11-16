@@ -10,7 +10,7 @@ class Cell(private val column: Int, private val alive: Boolean = true) {
         return if (neighbours == 2) alive() else dead()
     }
 
-    fun neighbours() = setOf(leftNeighbour(), rightNeighbour())
+    fun neighbours() = listOf(leftNeighbour(), rightNeighbour())
 
     private fun leftNeighbour() = Cell(column - 1)
 

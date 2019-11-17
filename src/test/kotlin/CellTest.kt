@@ -35,8 +35,8 @@ class CellTest {
     }
 
     @Test fun `has neighbours on the left and right`() {
-        assertThat(Cell(1).neighbours(), IsEqual(setOf(Cell(0), Cell(2))))
-        assertThat(Cell(2).neighbours(), IsEqual(setOf(Cell(1), Cell(3))))
+        assertThat(Cell(1).neighbours(), IsEqual(listOf(Cell(0), Cell(2))))
+        assertThat(Cell(2).neighbours(), IsEqual(listOf(Cell(1), Cell(3))))
     }
 
     @Test fun `dies without neighbours`() {
