@@ -3,6 +3,8 @@ package gameoflife
 class Cells(private val cells: List<Cell>) {
     fun size() = cells.size
 
+    fun map(transform: (Cell) -> Cell) = Cells(cells.map(transform))
+
     fun allDead() = Cells(cells.map { it.dead() })
 
     fun onlyExistingIn(other: Cells) =

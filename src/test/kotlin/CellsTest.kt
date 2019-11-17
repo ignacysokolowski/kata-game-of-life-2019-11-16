@@ -18,4 +18,15 @@ class CellsTest {
             )))
         )
     }
+
+    @Test fun `maps each of the cells with given transformation`() {
+        assertThat(
+            Cells(listOf(
+                Cell(1).alive(), Cell(2).alive(), Cell(3).alive()
+            )).map { it.dead() },
+            IsEqual(Cells(listOf(
+                Cell(1).dead(), Cell(2).dead(), Cell(3).dead()
+            )))
+        )
+    }
 }
