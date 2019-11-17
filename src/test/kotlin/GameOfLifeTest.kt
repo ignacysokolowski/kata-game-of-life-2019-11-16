@@ -110,15 +110,37 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
     }
 }
 
-class Board(private val cells: List<Cell>) {
+class Cells(private val cells: List<Cell>) {
+    fun size() = cells.size
 
-    constructor(vararg cells: Cell) : this(cells.asList())
+    fun allDead(): Cells {
+        return Cells(cells.map { it.dead() })
+    }
+
+    override fun toString(): String {
+        return "Cells(${cells})"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Cells) return false
+        return other.cells == cells
+    }
+
+    override fun hashCode(): Int {
+        return javaClass.hashCode()
+    }
+}
+
+class Board(private val cells: Cells) {
+
+    constructor(vararg cells: Cell) : this(Cells(cells.asList()))
 
     fun nextGeneration(): Board {
-        if (cells.size == 3) {
+        if (cells.size() == 3) {
             return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).dead())
         }
-        return Board(cells.map { it.dead() })
+        return Board(cells.allDead())
     }
 
     override fun toString(): String {
@@ -147,7 +169,7 @@ class BoardBuilder(private val init: BoardBuilder.() -> Unit) {
 
     fun build(): Board {
         init()
-        return Board(cells)
+        return Board(Cells(cells))
     }
 
     val O
