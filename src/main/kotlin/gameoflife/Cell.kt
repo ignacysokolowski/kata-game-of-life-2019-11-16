@@ -7,7 +7,7 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
     fun dead() = Cell(row, alive = false)
 
     fun nextGenerationGivenNeighbours(neighbours: Int): Cell {
-        return dead()
+        return if (neighbours == 2) alive() else dead()
     }
 
     fun neighbours() = setOf(leftNeighbour(), rightNeighbour())
