@@ -6,7 +6,7 @@ import gameoflife.Cells
 
 class BoardBuilder(private val init: BoardBuilder.() -> Unit) {
     private var cells = mutableListOf<Cell>()
-    private var row = 0
+    private var column = 0
 
     fun build(): Board {
         init()
@@ -19,11 +19,11 @@ class BoardBuilder(private val init: BoardBuilder.() -> Unit) {
     val X
         get() = addCell(nextCell().dead())
 
-    private fun nextCell() = Cell(row)
+    private fun nextCell() = Cell(column)
 
     private fun addCell(cell: Cell): BoardBuilder {
         cells.add(cell)
-        row += 1
+        column += 1
         return this
     }
 }
