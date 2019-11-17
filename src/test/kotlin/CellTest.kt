@@ -47,15 +47,19 @@ class CellTest {
         assertThat(Cell(2, 2).neighbours(), IsEqual(listOf(Cell(1, 2), Cell(3, 2))))
     }
 
-    @Test fun `dies without neighbours`() {
+    @Test fun `alive cell dies without neighbours`() {
         assertThat(Cell(1, 2).alive().nextGenerationGivenNeighbours(0), IsEqual(Cell(1, 2).dead()))
     }
 
-    @Test fun `dies with one neighbour`() {
+    @Test fun `alive cell dies with one neighbour`() {
         assertThat(Cell(1, 2).alive().nextGenerationGivenNeighbours(1), IsEqual(Cell(1, 2).dead()))
     }
 
-    @Test fun `survives with two neighbours`() {
+    @Test fun `alive cell survives with two neighbours`() {
         assertThat(Cell(1, 2).alive().nextGenerationGivenNeighbours(2), IsEqual(Cell(1, 2).alive()))
+    }
+
+    @Test fun `dead cell stays dead with two neighbours`() {
+        assertThat(Cell(1, 2).dead().nextGenerationGivenNeighbours(2), IsEqual(Cell(1, 2).dead()))
     }
 }

@@ -7,6 +7,7 @@ class Cell(private val column: Int, private val row: Int, private val alive: Boo
     fun dead() = Cell(column, row, alive = false)
 
     fun nextGenerationGivenNeighbours(neighbours: Int): Cell {
+        if (!alive) return dead()
         return if (neighbours == 2) alive() else dead()
     }
 
