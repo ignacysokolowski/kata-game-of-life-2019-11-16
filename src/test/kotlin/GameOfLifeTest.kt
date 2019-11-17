@@ -1,3 +1,4 @@
+import gameoflife.Board
 import gameoflife.Cell
 import gameoflife.Cells
 import org.hamcrest.core.IsEqual
@@ -74,33 +75,6 @@ class CellTest {
         assertThat(Cell(1).neighbours(), IsEqual(setOf(Cell(0), Cell(2))))
         assertThat(Cell(2).neighbours(), IsEqual(setOf(Cell(1), Cell(3))))
     }
-}
-
-class Board(private val cells: Cells) {
-
-    constructor(vararg cells: Cell) : this(Cells(cells.asList()))
-
-    fun nextGeneration(): Board {
-        if (cells.size() == 3) {
-            return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).dead())
-        }
-        return Board(cells.allDead())
-    }
-
-    override fun toString(): String {
-        return "Board(${cells})"
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Board) return false
-        return other.cells == cells
-    }
-
-    override fun hashCode(): Int {
-        return javaClass.hashCode()
-    }
-
 }
 
 fun board(grid: (BoardBuilder.() -> Unit)): Board {
