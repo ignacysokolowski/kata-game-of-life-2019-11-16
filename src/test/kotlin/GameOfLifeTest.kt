@@ -80,6 +80,7 @@ class CellTest {
 
     @Test fun `has neighbours on the left and right`() {
         assertThat(Cell(1).neighbours(), IsEqual(setOf(Cell(0), Cell(2))))
+        assertThat(Cell(2).neighbours(), IsEqual(setOf(Cell(1), Cell(3))))
     }
 }
 
@@ -115,7 +116,7 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
     }
 
     fun neighbours(): Set<Cell> {
-        return setOf(Cell(0), Cell(2))
+        return setOf(leftNeighbour(), rightNeighbour())
     }
 }
 
