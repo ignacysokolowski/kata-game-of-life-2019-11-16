@@ -5,8 +5,6 @@ class Cells(private val cells: List<Cell>) {
 
     fun map(transform: (Cell) -> Cell) = Cells(cells.map(transform))
 
-    fun allDead() = Cells(cells.map { it.dead() })
-
     fun onlyExistingIn(other: Cells) =
         Cells(cells.filter { other.cells.contains(it) })
 

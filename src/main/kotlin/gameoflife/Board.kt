@@ -4,14 +4,9 @@ class Board(private val cells: Cells) {
 
     constructor(vararg cells: Cell) : this(Cells(cells.asList()))
 
-    fun nextGeneration(): Board {
-        if (cells.size() == 3) {
-            return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).dead())
-        } else if (cells.size() == 4) {
-            return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).alive(), Cell(3).dead())
-        }
-        return Board(cells.allDead())
-    }
+    fun nextGeneration() = Board(cells.map {
+        it.nextGenerationGivenNeighbours(Cells(it.neighbours()).onlyExistingIn(cells).size())
+    })
 
     override fun toString() = "Board(${cells})"
 
