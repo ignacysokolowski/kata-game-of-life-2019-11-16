@@ -99,13 +99,13 @@ class Board(vararg val cells: Cell) {
         if (cells.isEmpty()) {
             return Board()
         }
+        if (cells.size == 3) {
+            return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).dead())
+        }
         if (cells.size == 1) {
             return Board(Cell(0).dead())
         }
-        if (cells.size == 2) {
-            return Board(Cell(0).dead(), Cell(1).dead())
-        }
-        return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).dead())
+        return Board(Cell(0).dead(), Cell(1).dead())
     }
 
     override fun toString(): String {
