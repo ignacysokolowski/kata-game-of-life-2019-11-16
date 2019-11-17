@@ -44,24 +44,40 @@ class CellTest {
         assertThat(Cell(2), IsEqual(Cell(2).alive()))
     }
 
-    @Test fun `two equal cells`() {
-        assertThat(Cell(2), IsEqual(Cell(2)))
+    @Test fun `is not dead by default`() {
+        assertThat(Cell(2), not(IsEqual(Cell(2).dead())))
     }
 
-    @Test fun `two unequal cells`() {
-        assertThat(Cell(2), not(IsEqual(Cell(3))))
+    @Test fun `can come to live`() {
+        assertThat(Cell(2).dead().alive(), IsEqual(Cell(2).alive()))
+    }
+
+    @Test fun `two equal alive cells`() {
+        assertThat(Cell(2).alive(), IsEqual(Cell(2).alive()))
+    }
+
+    @Test fun `two equal dead cells`() {
+        assertThat(Cell(2).dead(), IsEqual(Cell(2).dead()))
+    }
+
+    @Test fun `two unequal alive cells`() {
+        assertThat(Cell(2).alive(), not(IsEqual(Cell(3).alive())))
+    }
+
+    @Test fun `two unequal dead cells`() {
+        assertThat(Cell(2).dead(), not(IsEqual(Cell(3).dead())))
     }
 }
 
-class Cell(private val row: Int) {
+class Cell(private val row: Int, private val alive: Boolean = true) {
     override fun toString(): String {
-        return "Cell($row)"
+        return "Cell($row, ${if (alive) "alive" else "dead"})"
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Cell) return false
-        return other.row == row
+        return other.row == row && other.alive == alive
     }
 
     override fun hashCode(): Int {
@@ -69,7 +85,11 @@ class Cell(private val row: Int) {
     }
 
     fun alive(): Cell {
-        return Cell(row)
+        return Cell(row, alive = true)
+    }
+
+    fun dead(): Cell {
+        return Cell(row, alive = false)
     }
 }
 
