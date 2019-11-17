@@ -8,7 +8,7 @@ import org.junit.Test
 class BoardDSLTest {
 
     @Test fun `creates an empty board`() {
-        assertThat(board {}, IsEqual(Board()))
+        assertThat(board(), IsEqual(Board()))
     }
 
     @Test fun `creates a board with cells`() {
