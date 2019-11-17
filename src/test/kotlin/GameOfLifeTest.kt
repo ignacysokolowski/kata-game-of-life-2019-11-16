@@ -1,8 +1,6 @@
 import gameoflife.Board
-import gameoflife.Cell
 import gameoflife.dsl.board
 import org.hamcrest.core.IsEqual
-import org.hamcrest.core.IsNot.not
 import org.junit.Assert.assertThat
 import org.junit.Test
 
@@ -28,40 +26,4 @@ class GameOfLifeTest {
         assertThat(currentGeneration.nextGeneration(), IsEqual(nextGeneration))
     }
 
-}
-
-class CellTest {
-
-    @Test fun `is alive by default`() {
-        assertThat(Cell(2), IsEqual(Cell(2).alive()))
-    }
-
-    @Test fun `is not dead by default`() {
-        assertThat(Cell(2), not(IsEqual(Cell(2).dead())))
-    }
-
-    @Test fun `can come to live`() {
-        assertThat(Cell(2).dead().alive(), IsEqual(Cell(2).alive()))
-    }
-
-    @Test fun `two equal alive cells`() {
-        assertThat(Cell(2).alive(), IsEqual(Cell(2).alive()))
-    }
-
-    @Test fun `two equal dead cells`() {
-        assertThat(Cell(2).dead(), IsEqual(Cell(2).dead()))
-    }
-
-    @Test fun `two unequal alive cells`() {
-        assertThat(Cell(2).alive(), not(IsEqual(Cell(3).alive())))
-    }
-
-    @Test fun `two unequal dead cells`() {
-        assertThat(Cell(2).dead(), not(IsEqual(Cell(3).dead())))
-    }
-
-    @Test fun `has neighbours on the left and right`() {
-        assertThat(Cell(1).neighbours(), IsEqual(setOf(Cell(0), Cell(2))))
-        assertThat(Cell(2).neighbours(), IsEqual(setOf(Cell(1), Cell(3))))
-    }
 }
