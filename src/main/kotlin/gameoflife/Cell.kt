@@ -1,6 +1,6 @@
 package gameoflife
 
-class Cell(private val column: Int, private val row: Int = 0, private val alive: Boolean = true) {
+class Cell(private val column: Int, private val row: Int, private val alive: Boolean = true) {
 
     fun alive() = Cell(column, row, alive = true)
 
