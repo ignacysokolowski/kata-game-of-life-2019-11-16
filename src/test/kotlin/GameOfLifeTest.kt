@@ -22,6 +22,10 @@ class GameOfLifeTest {
         assertEvolution(board { O; O; O }, board { X; O; X })
     }
 
+    @Test fun `all cells with two neighbours survive`() {
+        assertEvolution(board { O; O; O; O }, board { X; O; O; X })
+    }
+
     private fun assertEvolution(currentGeneration: Board, nextGeneration: Board) {
         assertThat(currentGeneration.nextGeneration(), IsEqual(nextGeneration))
     }
