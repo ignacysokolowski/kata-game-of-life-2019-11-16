@@ -96,9 +96,6 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
 class Board(vararg val cells: Cell) {
 
     fun nextGeneration(): Board {
-        if (cells.isEmpty()) {
-            return Board()
-        }
         if (cells.size == 3) {
             return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).dead())
         }
