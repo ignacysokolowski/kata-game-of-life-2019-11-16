@@ -67,6 +67,10 @@ class CellTest {
     @Test fun `two unequal dead cells`() {
         assertThat(Cell(2).dead(), not(IsEqual(Cell(3).dead())))
     }
+
+    @Test fun `has a neighbour on the left side`() {
+        assertThat(Cell(0).leftNeighbour(), IsEqual(Cell(-1)))
+    }
 }
 
 class Cell(private val row: Int, private val alive: Boolean = true) {
@@ -90,6 +94,10 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
 
     fun dead(): Cell {
         return Cell(row, alive = false)
+    }
+
+    fun leftNeighbour(): Cell {
+        return Cell(-1)
     }
 }
 
