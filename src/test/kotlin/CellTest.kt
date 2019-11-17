@@ -38,4 +38,8 @@ class CellTest {
         assertThat(Cell(1).neighbours(), IsEqual(setOf(Cell(0), Cell(2))))
         assertThat(Cell(2).neighbours(), IsEqual(setOf(Cell(1), Cell(3))))
     }
+
+    @Test fun `dies without neighbours`() {
+        assertThat(Cell(1).alive().nextGenerationGivenNeighbours(0), IsEqual(Cell(1).dead()))
+    }
 }

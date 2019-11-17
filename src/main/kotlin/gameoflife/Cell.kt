@@ -6,6 +6,10 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
 
     fun dead() = Cell(row, alive = false)
 
+    fun nextGenerationGivenNeighbours(neighbours: Int): Cell {
+        return dead()
+    }
+
     fun neighbours() = setOf(leftNeighbour(), rightNeighbour())
 
     private fun leftNeighbour() = Cell(row - 1)
