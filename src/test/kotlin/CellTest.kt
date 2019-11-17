@@ -1,6 +1,6 @@
 import gameoflife.Cell
 import org.hamcrest.core.IsEqual
-import org.hamcrest.core.IsNot
+import org.hamcrest.core.IsNot.not
 import org.junit.Assert.assertThat
 import org.junit.Test
 
@@ -11,7 +11,7 @@ class CellTest {
     }
 
     @Test fun `is not dead by default`() {
-        assertThat(Cell(2), IsNot.not(IsEqual(Cell(2).dead())))
+        assertThat(Cell(2), not(IsEqual(Cell(2).dead())))
     }
 
     @Test fun `can come to live`() {
@@ -27,11 +27,11 @@ class CellTest {
     }
 
     @Test fun `two unequal alive cells`() {
-        assertThat(Cell(2).alive(), IsNot.not(IsEqual(Cell(3).alive())))
+        assertThat(Cell(2).alive(), not(IsEqual(Cell(3).alive())))
     }
 
     @Test fun `two unequal dead cells`() {
-        assertThat(Cell(2).dead(), IsNot.not(IsEqual(Cell(3).dead())))
+        assertThat(Cell(2).dead(), not(IsEqual(Cell(3).dead())))
     }
 
     @Test fun `has neighbours on the left and right`() {
