@@ -10,7 +10,7 @@ class BoardDSLTest {
     }
 
     @Test fun `creates a board with cells`() {
-        assertThat(board { O; O; O }, IsEqual(Board(Cell(0), Cell(1), Cell(2))))
+        assertThat(board { O; X; O }, IsEqual(Board(Cell(0).alive(), Cell(1).dead(), Cell(2).alive())))
     }
 }
 
@@ -132,10 +132,13 @@ class BoardBuilder(private val init: BoardBuilder.() -> Unit) {
     }
 
     val O
-        get() = addCell()
+        get() = addCell(alive = true)
 
-    private fun addCell(): BoardBuilder {
-        cells.add(Cell(row))
+    val X
+        get() = addCell(alive = false)
+
+    private fun addCell(alive: Boolean): BoardBuilder {
+        cells.add(Cell(row, alive))
         row += 1
         return this
     }
