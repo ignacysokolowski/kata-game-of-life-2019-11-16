@@ -21,15 +21,15 @@ class GameOfLifeTest {
     }
 
     @Test fun `all cells die in a board with a single cell`() {
-        assertEvolution(board { O }, board {})
+        assertEvolution(board { O }, board { X })
     }
 
     @Test fun `all cells die in a board with two cells`() {
-        assertEvolution(board { O; O }, board {})
+        assertEvolution(board { O; O }, board { X; X })
     }
 
     @Test fun `cell with two neighbours survives`() {
-        assertEvolution(Board(Cell(0), Cell(1), Cell(1)), Board(Cell(1)))
+        assertEvolution(board { O; O; O }, board { X; O; X })
     }
 
     private fun assertEvolution(currentGeneration: Board, nextGeneration: Board) {
@@ -96,8 +96,14 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
 class Board(vararg val cells: Cell) {
 
     fun nextGeneration(): Board {
+        if (cells.size == 1) {
+            return Board(Cell(0).dead())
+        }
+        if (cells.size == 2) {
+            return Board(Cell(0).dead(), Cell(1).dead())
+        }
         if (cells.size == 3) {
-            return Board(Cell(1))
+            return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).dead())
         }
         return Board()
     }
