@@ -68,16 +68,6 @@ class CellTest {
         assertThat(Cell(2).dead(), not(IsEqual(Cell(3).dead())))
     }
 
-    @Test fun `has a neighbour on the left side`() {
-        assertThat(Cell(0).leftNeighbour(), IsEqual(Cell(-1)))
-        assertThat(Cell(1).leftNeighbour(), IsEqual(Cell(0)))
-    }
-
-    @Test fun `has a neighbour on the right side`() {
-        assertThat(Cell(0).rightNeighbour(), IsEqual(Cell(1)))
-        assertThat(Cell(1).rightNeighbour(), IsEqual(Cell(2)))
-    }
-
     @Test fun `has neighbours on the left and right`() {
         assertThat(Cell(1).neighbours(), IsEqual(setOf(Cell(0), Cell(2))))
         assertThat(Cell(2).neighbours(), IsEqual(setOf(Cell(1), Cell(3))))
@@ -107,16 +97,16 @@ class Cell(private val row: Int, private val alive: Boolean = true) {
         return Cell(row, alive = false)
     }
 
-    fun leftNeighbour(): Cell {
+    fun neighbours(): Set<Cell> {
+        return setOf(leftNeighbour(), rightNeighbour())
+    }
+
+    private fun leftNeighbour(): Cell {
         return Cell(row - 1)
     }
 
-    fun rightNeighbour(): Cell {
+    private fun rightNeighbour(): Cell {
         return Cell(row + 1)
-    }
-
-    fun neighbours(): Set<Cell> {
-        return setOf(leftNeighbour(), rightNeighbour())
     }
 }
 
