@@ -10,18 +10,18 @@ class BoardTest {
     @Test
     fun `two equal boards`() {
         Assert.assertThat(Board(Cells(listOf(
-            Cell(1).alive(), Cell(2).dead()
+            Cell(1, 2).alive(), Cell(2, 2).dead()
         ))), IsEqual(Board(Cells(listOf(
-            Cell(1).alive(), Cell(2).dead()
+            Cell(1, 2).alive(), Cell(2, 2).dead()
         )))))
     }
 
     @Test
     fun `two boards with different cell states`() {
         Assert.assertThat(Board(Cells(listOf(
-            Cell(1).alive(), Cell(2).dead()
+            Cell(1, 2).alive(), Cell(2, 2).dead()
         ))), not(IsEqual(Board(Cells(listOf(
-            Cell(1).alive(), Cell(2).alive()
+            Cell(1, 2).alive(), Cell(2, 2).alive()
         )))))
         )
     }
@@ -29,9 +29,19 @@ class BoardTest {
     @Test
     fun `two boards with different cell columns`() {
         Assert.assertThat(Board(Cells(listOf(
-            Cell(1).alive(), Cell(2).dead()
+            Cell(1, 2).alive(), Cell(2, 2).dead()
         ))), not(IsEqual(Board(Cells(listOf(
-            Cell(1).alive(), Cell(3).dead()
+            Cell(1, 2).alive(), Cell(3, 2).dead()
+        )))))
+        )
+    }
+
+    @Test
+    fun `two boards with different cell rows`() {
+        Assert.assertThat(Board(Cells(listOf(
+            Cell(1, 2).alive(), Cell(2, 2).dead()
+        ))), not(IsEqual(Board(Cells(listOf(
+            Cell(1, 2).alive(), Cell(2, 3).dead()
         )))))
         )
     }
