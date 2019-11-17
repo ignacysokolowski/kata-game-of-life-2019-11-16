@@ -14,7 +14,7 @@ class BoardDSLTest {
     @Test fun `creates a board with cells`() {
         assertThat(
             board { O; X; O },
-            IsEqual(Board(Cell(0).alive(), Cell(1).dead(), Cell(2).alive()))
+            IsEqual(Board(Cell(0, 0).alive(), Cell(1, 0).dead(), Cell(2, 0).alive()))
         )
     }
 }
