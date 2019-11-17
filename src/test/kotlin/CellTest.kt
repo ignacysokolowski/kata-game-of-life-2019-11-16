@@ -42,4 +42,8 @@ class CellTest {
     @Test fun `dies without neighbours`() {
         assertThat(Cell(1).alive().nextGenerationGivenNeighbours(0), IsEqual(Cell(1).dead()))
     }
+
+    @Test fun `dies with one neighbour`() {
+        assertThat(Cell(1).alive().nextGenerationGivenNeighbours(1), IsEqual(Cell(1).dead()))
+    }
 }
