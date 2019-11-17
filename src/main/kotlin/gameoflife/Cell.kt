@@ -2,6 +2,11 @@ package gameoflife
 
 class Cell(private val column: Int, private val row: Int, private val alive: Boolean = true) {
 
+    companion object {
+        fun alive(column: Int, row: Int) = Cell(column, row, alive = true)
+        fun dead(column: Int, row: Int) = Cell(column, row, alive = false)
+    }
+
     fun alive() = Cell(column, row, alive = true)
 
     fun dead() = Cell(column, row, alive = false)
@@ -18,15 +23,15 @@ class Cell(private val column: Int, private val row: Int, private val alive: Boo
         bottomNeighbour()
     )
 
-    private fun leftNeighbour() = Cell(column - 1, row)
+    private fun leftNeighbour() = alive(column - 1, row)
 
-    private fun rightNeighbour() = Cell(column + 1, row)
+    private fun rightNeighbour() = alive(column + 1, row)
 
-    private fun topNeighbour() = Cell(column, row - 1)
+    private fun topNeighbour() = alive(column, row - 1)
 
-    private fun bottomNeighbour() = Cell(column, row + 1)
+    private fun bottomNeighbour() = alive(column, row + 1)
 
-    override fun toString() = "Cell($column, $row, ${if (alive) "alive" else "dead"})"
+    override fun toString() = "Cell.${if (alive) "alive" else "dead"}($column, $row)"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

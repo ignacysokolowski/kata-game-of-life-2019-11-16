@@ -15,67 +15,71 @@ class CellTest {
     }
 
     @Test fun `can come to live`() {
-        assertThat(Cell(2, 1).dead().alive(), IsEqual(Cell(2, 1).alive()))
+        assertThat(Cell.dead(2, 1).alive(), IsEqual(Cell.alive(2, 1)))
+    }
+
+    @Test fun `can die`() {
+        assertThat(Cell.alive(2, 1).dead(), IsEqual(Cell.dead(2, 1)))
     }
 
     @Test fun `two equal alive cells`() {
-        assertThat(Cell(2, 1).alive(), IsEqual(Cell(2, 1).alive()))
+        assertThat(Cell.alive(2, 1), IsEqual(Cell.alive(2, 1)))
     }
 
     @Test fun `two equal dead cells`() {
-        assertThat(Cell(2, 1).dead(), IsEqual(Cell(2, 1).dead()))
+        assertThat(Cell.dead(2, 1), IsEqual(Cell.dead(2, 1)))
     }
 
     @Test fun `two unequal alive cells`() {
-        assertThat(Cell(2, 1).alive(), not(IsEqual(Cell(3, 1).alive())))
+        assertThat(Cell.alive(2, 1), not(IsEqual(Cell.alive(3, 1))))
     }
 
     @Test fun `two alive cells with unequal row`() {
-        assertThat(Cell(2, 1).alive(), not(IsEqual(Cell(2, 2).alive())))
+        assertThat(Cell.alive(2, 1), not(IsEqual(Cell.alive(2, 2))))
     }
 
     @Test fun `two unequal dead cells`() {
-        assertThat(Cell(2, 1).dead(), not(IsEqual(Cell(3, 1).dead())))
+        assertThat(Cell.dead(2, 1), not(IsEqual(Cell.dead(3, 1))))
     }
 
     @Test fun `two dead cells with unequal row`() {
-        assertThat(Cell(2, 1).dead(), not(IsEqual(Cell(2, 2).dead())))
+        assertThat(Cell.dead(2, 1), not(IsEqual(Cell.dead(2, 2))))
     }
 
     @Test fun `has potential alive neighbours on the left and right, top and bottom`() {
         assertThat(
-            Cell(2, 2).potentialAliveNeighbours(),
+            Cell.alive(2, 2).potentialAliveNeighbours(),
             IsEqual(listOf(
-                Cell(1, 2).alive(),
-                Cell(3, 2).alive(),
-                Cell(2, 1).alive(),
-                Cell(2, 3).alive()
+                Cell.alive(1, 2),
+                Cell.alive(3, 2),
+                Cell.alive(2, 1),
+                Cell.alive(2, 3)
             ))
         )
         assertThat(
-            Cell(3, 3).potentialAliveNeighbours(),
+            Cell.alive(3, 3).potentialAliveNeighbours(),
             IsEqual(listOf(
-                Cell(2, 3).alive(),
-                Cell(4, 3).alive(),
-                Cell(3, 2).alive(),
-                Cell(3, 4).alive()
+                Cell.alive(2, 3),
+                Cell.alive(4, 3),
+                Cell.alive(3, 2),
+                Cell.alive(3, 4)
             ))
         )
     }
 
-    @Test fun `alive cell dies without neighbours`() {
-        assertThat(Cell(1, 2).alive().nextGenerationGivenNeighbours(0), IsEqual(Cell(1, 2).dead()))
+    @Test fun `alive cell dies without alive neighbours`() {
+        assertThat(Cell.alive(1, 2).nextGenerationGivenNeighbours(0), IsEqual(Cell.dead(1, 2)))
     }
 
-    @Test fun `alive cell dies with one neighbour`() {
-        assertThat(Cell(1, 2).alive().nextGenerationGivenNeighbours(1), IsEqual(Cell(1, 2).dead()))
+    @Test fun `alive cell dies with one alive neighbour`() {
+        assertThat(Cell.alive(1, 2).nextGenerationGivenNeighbours(1), IsEqual(Cell.dead(1, 2)))
     }
 
-    @Test fun `alive cell survives with two neighbours`() {
-        assertThat(Cell(1, 2).alive().nextGenerationGivenNeighbours(2), IsEqual(Cell(1, 2).alive()))
+    @Test fun `alive cell survives with two alive neighbours`() {
+        assertThat(Cell.alive(1, 2).nextGenerationGivenNeighbours(2), IsEqual(Cell.alive(1, 2)))
     }
 
-    @Test fun `dead cell stays dead with two neighbours`() {
-        assertThat(Cell(1, 2).dead().nextGenerationGivenNeighbours(2), IsEqual(Cell(1, 2).dead()))
+    @Test fun `dead cell stays dead with two alive neighbours`() {
+        assertThat(Cell.dead(1, 2).nextGenerationGivenNeighbours(2), IsEqual(Cell.dead(1, 2)))
     }
 }
