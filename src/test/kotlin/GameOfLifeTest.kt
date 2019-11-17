@@ -102,10 +102,7 @@ class Board(vararg val cells: Cell) {
         if (cells.size == 3) {
             return Board(Cell(0).dead(), Cell(1).alive(), Cell(2).dead())
         }
-        if (cells.size == 1) {
-            return Board(Cell(0).dead())
-        }
-        return Board(Cell(0).dead(), Cell(1).dead())
+        return Board(*cells.map { it.dead() }.toTypedArray())
     }
 
     override fun toString(): String {
