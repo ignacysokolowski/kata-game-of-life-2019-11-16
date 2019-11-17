@@ -9,9 +9,9 @@ class CellsTest {
     @Test fun `finds cells only existing in other cells`() {
         assertThat(
             Cells(listOf(
-                Cell(1), Cell(2), Cell(3), Cell(4)
+                Cell(1), Cell(2), Cell(3), Cell(4), Cell(5).alive()
             )).onlyExistingIn(Cells(listOf(
-                Cell(2), Cell(4), Cell(5)
+                Cell(2), Cell(4), Cell(5).dead()
             ))),
             IsEqual(Cells(listOf(
                 Cell(2), Cell(4)
