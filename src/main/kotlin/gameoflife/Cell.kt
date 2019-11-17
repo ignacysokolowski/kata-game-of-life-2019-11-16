@@ -11,11 +11,15 @@ class Cell(private val column: Int, private val row: Int, private val alive: Boo
         return if (neighbours == 2) alive() else dead()
     }
 
-    fun neighbours() = listOf(leftNeighbour(), rightNeighbour())
+    fun neighbours() = listOf(leftNeighbour(), rightNeighbour(), topNeighbour(), bottomNeighbour())
 
     private fun leftNeighbour() = Cell(column - 1, row)
 
     private fun rightNeighbour() = Cell(column + 1, row)
+
+    private fun topNeighbour() = Cell(column, row - 1)
+
+    private fun bottomNeighbour() = Cell(column, row + 1)
 
     override fun toString() = "Cell($column, $row, ${if (alive) "alive" else "dead"})"
 
