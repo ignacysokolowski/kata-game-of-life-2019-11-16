@@ -1,6 +1,6 @@
 package gameoflife
 
-abstract class Cell(protected val column: Int, protected val row: Int) {
+abstract class Cell(protected val column: Column, protected val row: Int) {
 
     companion object {
         fun alive(column: Int, row: Int): Cell = AliveCell(Column(column), Row(row))
@@ -8,12 +8,12 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
         private fun aliveFrom(neighbour: Neighbour) = alive(neighbour.column, neighbour.row)
     }
 
-    fun alive() = alive(column, row)
-    fun dead() = dead(column, row)
+    fun alive() = alive(column.number, row)
+    fun dead() = dead(column.number, row)
 
     abstract fun nextGenerationGiven(neighboursAlive: Int): Cell
 
-    fun potentialAliveNeighbours() = Neighbours.ofCell(Column(column), Row(row)).map { aliveFrom(it) }
+    fun potentialAliveNeighbours() = Neighbours.ofCell(column, Row(row)).map { aliveFrom(it) }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -25,14 +25,14 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
     override fun hashCode() = javaClass.hashCode()
 }
 
-private class AliveCell constructor(column: Column, row: Row) : Cell(column.number, row.number) {
+private class AliveCell constructor(column: Column, row: Row) : Cell(column, row.number) {
     override fun nextGenerationGiven(neighboursAlive: Int): Cell {
         return if (neighboursAlive in listOf(2, 3)) alive() else dead()
     }
     override fun toString() = "Cell.alive($column, $row)"
 }
 
-private class DeadCell constructor(column: Column, row: Row) : Cell(column.number, row.number) {
+private class DeadCell constructor(column: Column, row: Row) : Cell(column, row.number) {
     override fun nextGenerationGiven(neighboursAlive: Int): Cell {
         return if (neighboursAlive == 3) alive() else dead()
     }
