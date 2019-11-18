@@ -10,7 +10,7 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
     fun alive() = alive(column, row)
     fun dead() = dead(column, row)
 
-    abstract fun nextGenerationGivenNeighbours(neighbours: Int): Cell
+    abstract fun nextGenerationGiven(neighbours: Int): Cell
 
     fun potentialAliveNeighbours() = listOf(
         leftNeighbour(),
@@ -35,13 +35,13 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
 }
 
 private class AliveCell constructor(column: Int, row: Int) : Cell(column, row) {
-    override fun nextGenerationGivenNeighbours(neighbours: Int): Cell {
+    override fun nextGenerationGiven(neighbours: Int): Cell {
         return if (neighbours == 2) alive() else dead()
     }
     override fun toString() = "Cell.alive($column, $row)"
 }
 
 private class DeadCell constructor(column: Int, row: Int) : Cell(column, row) {
-    override fun nextGenerationGivenNeighbours(neighbours: Int) = dead()
+    override fun nextGenerationGiven(neighbours: Int) = dead()
     override fun toString() = "Cell.dead($column, $row)"
 }
