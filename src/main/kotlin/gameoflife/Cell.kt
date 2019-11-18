@@ -1,6 +1,10 @@
 package gameoflife
 
-class Cell(private val column: Int, private val row: Int, private val alive: Boolean = true) {
+class Cell private constructor(
+    private val column: Int,
+    private val row: Int,
+    private val alive: Boolean
+) {
 
     companion object {
         fun alive(column: Int, row: Int) = Cell(column, row, alive = true)

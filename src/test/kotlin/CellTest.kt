@@ -6,14 +6,6 @@ import org.junit.Test
 
 class CellTest {
 
-    @Test fun `is alive by default`() {
-        assertThat(Cell(2, 1), IsEqual(Cell(2, 1).alive()))
-    }
-
-    @Test fun `is not dead by default`() {
-        assertThat(Cell(2, 1), not(IsEqual(Cell(2, 1).dead())))
-    }
-
     @Test fun `can come to live`() {
         assertThat(Cell.dead(2, 1).alive(), IsEqual(Cell.alive(2, 1)))
     }
