@@ -14,6 +14,10 @@ class CellTest {
         assertThat(Cell.alive(2, 1).dead(), IsEqual(Cell.dead(2, 1)))
     }
 
+    @Test fun `alive cell is not dead`() {
+        assertThat(Cell.alive(2, 1), not(IsEqual(Cell.dead(2, 1))))
+    }
+
     @Test fun `two equal alive cells`() {
         assertThat(Cell.alive(2, 1), IsEqual(Cell.alive(2, 1)))
     }
