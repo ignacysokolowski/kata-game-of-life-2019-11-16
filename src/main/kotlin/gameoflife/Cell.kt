@@ -3,7 +3,7 @@ package gameoflife
 abstract class Cell(protected val column: Int, protected val row: Int) {
 
     companion object {
-        fun alive(column: Int, row: Int): Cell = AliveCell(Column(column), row)
+        fun alive(column: Int, row: Int): Cell = AliveCell(Column(column), Row(row))
         fun dead(column: Int, row: Int): Cell = DeadCell(Column(column), row)
         private fun aliveFrom(neighbour: Neighbour) = alive(neighbour.column, neighbour.row)
     }
@@ -25,7 +25,7 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
     override fun hashCode() = javaClass.hashCode()
 }
 
-private class AliveCell constructor(column: Column, row: Int) : Cell(column.number, row) {
+private class AliveCell constructor(column: Column, row: Row) : Cell(column.number, row.number) {
     override fun nextGenerationGiven(neighboursAlive: Int): Cell {
         return if (neighboursAlive in listOf(2, 3)) alive() else dead()
     }
