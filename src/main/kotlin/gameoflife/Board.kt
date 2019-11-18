@@ -6,7 +6,7 @@ class Board(private val cells: Cells) {
 
     fun nextGeneration() = Board(cells.map { it.nextGenerationGiven(aliveNeighboursOf(it)) })
 
-    private fun aliveNeighboursOf(it: Cell) = Cells(it.potentialAliveNeighbours()).onlyExistingIn(cells).size()
+    private fun aliveNeighboursOf(cell: Cell) = Cells(cell.potentialAliveNeighbours()).onlyExistingIn(cells).size()
 
     override fun toString() = "Board(${cells})"
 
