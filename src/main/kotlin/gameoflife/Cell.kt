@@ -3,8 +3,6 @@ package gameoflife
 abstract class Cell(protected val column: Column, protected val row: Row) {
 
     companion object {
-        fun alive(column: Int, row: Int): Cell = alive(Column(column), Row(row))
-        fun dead(column: Int, row: Int): Cell = dead(Column(column), Row(row))
         fun alive(column: Column, row: Row): Cell = AliveCell(column, row)
         fun dead(column: Column, row: Row): Cell = DeadCell(column, row)
         private fun aliveFrom(neighbour: Neighbour) = alive(neighbour.column, neighbour.row)
