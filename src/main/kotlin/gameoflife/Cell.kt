@@ -12,7 +12,6 @@ class Cell private constructor(
     }
 
     fun alive() = alive(column, row)
-
     fun dead() = dead(column, row)
 
     fun nextGenerationGivenNeighbours(neighbours: Int): Cell {
@@ -28,11 +27,8 @@ class Cell private constructor(
     )
 
     private fun leftNeighbour() = alive(column - 1, row)
-
     private fun rightNeighbour() = alive(column + 1, row)
-
     private fun topNeighbour() = alive(column, row - 1)
-
     private fun bottomNeighbour() = alive(column, row + 1)
 
     override fun toString() = "Cell.${if (alive) "alive" else "dead"}($column, $row)"
