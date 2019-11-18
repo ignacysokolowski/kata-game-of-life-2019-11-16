@@ -12,10 +12,14 @@ class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
     fun build(): Board {
         for (init in inits) {
             init()
-            row += 1
-            column = 0
+            nextRow()
         }
         return Board(Cells(cells))
+    }
+
+    private fun nextRow() {
+        row += 1
+        column = 0
     }
 
     val O
