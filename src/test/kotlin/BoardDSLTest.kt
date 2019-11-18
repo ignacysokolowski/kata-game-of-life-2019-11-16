@@ -19,9 +19,9 @@ class BoardDSLTest {
                 { O; O; X }
             ),
             IsEqual(Board(
-                Cell(0, 0).alive(), Cell(1, 0).dead(), Cell(2, 0).alive(),
-                Cell(0, 1).dead(), Cell(1, 1).alive(), Cell(2, 1).dead(),
-                Cell(0, 2).alive(), Cell(1, 2).alive(), Cell(2, 2).dead()
+                Cell.alive(0, 0), Cell.dead(1, 0), Cell.alive(2, 0),
+                Cell.dead(0, 1), Cell.alive(1, 1), Cell.dead(2, 1),
+                Cell.alive(0, 2), Cell.alive(1, 2), Cell.dead(2, 2)
             ))
         )
     }
