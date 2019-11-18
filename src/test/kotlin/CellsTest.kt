@@ -9,10 +9,10 @@ class CellsTest {
 
     @Test fun `equal if has the some cells as the other one`() {
         assertThat(
-            Cells(listOf(
+            Cells(setOf(
                 Cell.alive(1, 2), Cell.dead(2, 3), Cell.alive(4, 4)
             )),
-            IsEqual(Cells(listOf(
+            IsEqual(Cells(setOf(
                 Cell.alive(1, 2), Cell.dead(2, 3), Cell.alive(4, 4)
             )))
         )
@@ -20,10 +20,10 @@ class CellsTest {
 
     @Test fun `unequal if other cells are in a different state`() {
         assertThat(
-            Cells(listOf(
+            Cells(setOf(
                 Cell.alive(1, 2), Cell.dead(2, 3), Cell.alive(4, 4)
             )),
-            not(IsEqual(Cells(listOf(
+            not(IsEqual(Cells(setOf(
                 Cell.alive(1, 2), Cell.alive(2, 3), Cell.dead(4, 4)
             ))))
         )
@@ -31,20 +31,20 @@ class CellsTest {
 
     @Test fun `finds cells only existing in other cells`() {
         assertThat(
-            Cells(listOf(
+            Cells(setOf(
                 Cell.alive(1, 2),
                 Cell.alive(2, 2),
                 Cell.alive(3, 2),
                 Cell.alive(4, 2),
                 Cell.alive(5, 2),
                 Cell.alive(6, 2)
-            )).onlyExistingIn(Cells(listOf(
+            )).onlyExistingIn(Cells(setOf(
                 Cell.alive(2, 2),
                 Cell.alive(4, 2),
                 Cell.dead(5, 2),
                 Cell.alive(6, 3)
             ))),
-            IsEqual(Cells(listOf(
+            IsEqual(Cells(setOf(
                 Cell.alive(2, 2),
                 Cell.alive(4, 2)
             )))
@@ -53,10 +53,10 @@ class CellsTest {
 
     @Test fun `maps each of the cells with given transformation`() {
         assertThat(
-            Cells(listOf(
+            Cells(setOf(
                 Cell.alive(1, 2), Cell.alive(2, 2), Cell.alive(3, 2)
             )).map { it.dead() },
-            IsEqual(Cells(listOf(
+            IsEqual(Cells(setOf(
                 Cell.dead(1, 2), Cell.dead(2, 2), Cell.dead(3, 2)
             )))
         )

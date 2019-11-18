@@ -9,18 +9,18 @@ import org.junit.Test
 class BoardTest {
     @Test
     fun `two equal boards`() {
-        Assert.assertThat(Board(Cells(listOf(
+        Assert.assertThat(Board(Cells(setOf(
             Cell.alive(1, 2), Cell.dead(2, 2)
-        ))), IsEqual(Board(Cells(listOf(
+        ))), IsEqual(Board(Cells(setOf(
             Cell.alive(1, 2), Cell.dead(2, 2)
         )))))
     }
 
     @Test
     fun `two boards with different cell states`() {
-        Assert.assertThat(Board(Cells(listOf(
+        Assert.assertThat(Board(Cells(setOf(
             Cell.alive(1, 2), Cell.dead(2, 2)
-        ))), not(IsEqual(Board(Cells(listOf(
+        ))), not(IsEqual(Board(Cells(setOf(
             Cell.alive(1, 2), Cell.alive(2, 2)
         )))))
         )
@@ -28,9 +28,9 @@ class BoardTest {
 
     @Test
     fun `two boards with different cell columns`() {
-        Assert.assertThat(Board(Cells(listOf(
+        Assert.assertThat(Board(Cells(setOf(
             Cell.alive(1, 2), Cell.dead(2, 2)
-        ))), not(IsEqual(Board(Cells(listOf(
+        ))), not(IsEqual(Board(Cells(setOf(
             Cell.alive(1, 2), Cell.dead(3, 2)
         )))))
         )
@@ -38,9 +38,9 @@ class BoardTest {
 
     @Test
     fun `two boards with different cell rows`() {
-        Assert.assertThat(Board(Cells(listOf(
+        Assert.assertThat(Board(Cells(setOf(
             Cell.alive(1, 2), Cell.dead(2, 2)
-        ))), not(IsEqual(Board(Cells(listOf(
+        ))), not(IsEqual(Board(Cells(setOf(
             Cell.alive(1, 2), Cell.dead(2, 3)
         )))))
         )

@@ -45,7 +45,7 @@ class CellTest {
     @Test fun `has potential alive neighbours horizontally, vertically and diagonally`() {
         assertThat(
             Cell.alive(2, 2).potentialAliveNeighbours(),
-            IsEqual(listOf(
+            IsEqual(setOf(
                 Cell.alive(1, 1),
                 Cell.alive(2, 1),
                 Cell.alive(3, 1),
@@ -58,7 +58,7 @@ class CellTest {
         )
         assertThat(
             Cell.alive(3, 3).potentialAliveNeighbours(),
-            IsEqual(listOf(
+            IsEqual(setOf(
                 Cell.alive(2, 2),
                 Cell.alive(3, 2),
                 Cell.alive(4, 2),

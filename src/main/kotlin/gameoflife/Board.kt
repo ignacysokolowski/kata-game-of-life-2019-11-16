@@ -2,7 +2,7 @@ package gameoflife
 
 class Board(private val cells: Cells) {
 
-    constructor(vararg cells: Cell) : this(Cells(cells.asList()))
+    constructor(vararg cells: Cell) : this(Cells(cells.toSet()))
 
     fun nextGeneration() =
         Board(cells.map { it.nextGenerationGiven(aliveNeighboursOf(it)) })

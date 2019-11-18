@@ -5,7 +5,7 @@ import gameoflife.Cell
 import gameoflife.Cells
 
 class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
-    private var cells = mutableListOf<Cell>()
+    private var cells = mutableSetOf<Cell>()
     private var row = 0
     private var column = 0
 

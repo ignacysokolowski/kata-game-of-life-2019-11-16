@@ -7,9 +7,9 @@ class Neighbours private constructor(private val column: Int, private val row: I
         fun ofCell(column: Int, row: Int) = Neighbours(column, row)
     }
 
-    fun <T> map(transform: (Neighbour) -> T) = all().map(transform)
+    fun <T> map(transform: (Neighbour) -> T) = all().map(transform).toSet()
 
-    private fun all() = listOf(
+    private fun all() = setOf(
         topLeft(),
         top(),
         topRight(),

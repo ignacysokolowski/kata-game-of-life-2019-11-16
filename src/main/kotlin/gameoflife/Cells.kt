@@ -1,6 +1,8 @@
 package gameoflife
 
-class Cells(private val cells: List<Cell>) {
+class Cells(private val cells: Set<Cell>) {
+    private constructor(cells: List<Cell>) : this(cells.toSet())
+
     fun size() = cells.size
 
     fun map(transform: (Cell) -> Cell) = Cells(cells.map(transform))
