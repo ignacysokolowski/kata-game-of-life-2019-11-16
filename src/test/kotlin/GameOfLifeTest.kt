@@ -74,8 +74,76 @@ class GameOfLifeTest {
         ))
     }
 
+    @Test fun `block`() {
+        assertGenerations(board(
+            { X; X; X; X },
+            { X; O; O; X },
+            { X; O; O; X },
+            { X; X; X; X }
+        ), board(
+            { X; X; X; X },
+            { X; O; O; X },
+            { X; O; O; X },
+            { X; X; X; X }
+        ))
+    }
+
+    @Test fun `blinker`() {
+        assertGenerations(board(
+            { X; X; X },
+            { O; O; O },
+            { X; X; X }
+        ), board(
+            { X; O; X },
+            { X; O; X },
+            { X; O; X }
+        ), board(
+            { X; X; X },
+            { O; O; O },
+            { X; X; X }
+        ), board(
+            { X; O; X },
+            { X; O; X },
+            { X; O; X }
+        ))
+    }
+
+    @Test fun `glider`() {
+        assertGenerations(board(
+            { X; O; X; X },
+            { X; X; O; X },
+            { O; O; O; X },
+            { X; X; X; X }
+        ), board(
+            { X; X; X; X },
+            { O; X; O; X },
+            { X; O; O; X },
+            { X; O; X; X }
+        ), board(
+            { X; X; X; X },
+            { X; X; O; X },
+            { O; X; O; X },
+            { X; O; O; X }
+        ), board(
+            { X; X; X; X },
+            { X; O; X; X },
+            { X; X; O; O },
+            { X; O; O; X }
+        ))
+    }
+
     private fun assertEvolution(currentGeneration: Board, nextGeneration: Board) {
         assertThat(currentGeneration.nextGeneration(), IsEqual(nextGeneration))
+    }
+
+    private fun assertGenerations(vararg generations: Board) {
+        var currentGeneration: Board? = null
+        for (nextGeneration in generations) {
+            if (currentGeneration != null) {
+                assertEvolution(currentGeneration, nextGeneration)
+            }
+            currentGeneration = nextGeneration
+        }
     }
 
 }
