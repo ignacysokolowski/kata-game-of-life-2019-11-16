@@ -11,9 +11,9 @@ class Cell private constructor(
         fun dead(column: Int, row: Int) = Cell(column, row, alive = false)
     }
 
-    fun alive() = Cell(column, row, alive = true)
+    fun alive() = alive(column, row)
 
-    fun dead() = Cell(column, row, alive = false)
+    fun dead() = dead(column, row)
 
     fun nextGenerationGivenNeighbours(neighbours: Int): Cell {
         if (!alive) return dead()
