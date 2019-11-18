@@ -74,7 +74,7 @@ class GameOfLifeTest {
         ))
     }
 
-    @Test fun `block`() {
+    @Test fun `block is a still life`() {
         assertGenerations(board(
             { X; X; X; X },
             { X; O; O; X },
@@ -88,7 +88,7 @@ class GameOfLifeTest {
         ))
     }
 
-    @Test fun `blinker`() {
+    @Test fun `blinker is an oscillator`() {
         assertGenerations(board(
             { X; X; X },
             { O; O; O },
@@ -108,7 +108,7 @@ class GameOfLifeTest {
         ))
     }
 
-    @Test fun `glider`() {
+    @Test fun `glider is a spaceship`() {
         assertGenerations(board(
             { X; O; X; X },
             { X; X; O; X },
