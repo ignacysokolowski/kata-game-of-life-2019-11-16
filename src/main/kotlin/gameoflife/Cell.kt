@@ -13,7 +13,7 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
 
     abstract fun nextGenerationGiven(neighboursAlive: Int): Cell
 
-    fun potentialAliveNeighbours() = Neighbours.ofCell(column, row).map { aliveFrom(it) }
+    fun potentialAliveNeighbours() = Neighbours.ofCell(Column(column), Row(row)).map { aliveFrom(it) }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
