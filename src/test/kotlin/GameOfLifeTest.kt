@@ -11,23 +11,43 @@ class GameOfLifeTest {
     }
 
     @Test fun `all cells die in a board with a single cell`() {
-        assertEvolution(board({ O }), board({ X }))
+        assertEvolution(board(
+            { O }
+        ), board(
+            { X }
+        ))
     }
 
     @Test fun `all cells die in a board with two cells`() {
-        assertEvolution(board({ O; O }), board({ X; X }))
+        assertEvolution(board(
+            { O; O }
+        ), board(
+            { X; X }
+        ))
     }
 
     @Test fun `cell with two neighbours alive survives`() {
-        assertEvolution(board({ O; O; O }), board({ X; O; X }))
+        assertEvolution(board(
+            { O; O; O }
+        ), board(
+            { X; O; X }
+        ))
     }
 
     @Test fun `dead cell with two neighbours alive stays dead`() {
-        assertEvolution(board({ O; X; O }), board({ X; X; X }))
+        assertEvolution(board(
+            { O; X; O }
+        ), board(
+            { X; X; X }
+        ))
     }
 
     @Test fun `all cells with two horizontal neighbours alive survive`() {
-        assertEvolution(board({ O; O; O; O }), board({ X; O; O; X }))
+        assertEvolution(board(
+            { O; O; O; O }
+        ), board(
+            { X; O; O; X }
+        ))
     }
 
     @Test fun `all cells with two vertical neighbours alive survive`() {
@@ -45,7 +65,11 @@ class GameOfLifeTest {
     }
 
     @Test fun `cell with less than two neighbours alive dies`() {
-        assertEvolution(board({ X; O; X }), board({ X; X; X }))
+        assertEvolution(board(
+            { X; O; X }
+        ), board(
+            { X; X; X }
+        ))
     }
 
     private fun assertEvolution(currentGeneration: Board, nextGeneration: Board) {
