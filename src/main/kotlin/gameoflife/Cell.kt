@@ -5,6 +5,7 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
     companion object {
         fun alive(column: Int, row: Int): Cell = AliveCell(column, row)
         fun dead(column: Int, row: Int): Cell = DeadCell(column, row)
+        private fun aliveFrom(neighbour: Neighbour) = alive(neighbour.column, neighbour.row)
     }
 
     fun alive() = alive(column, row)
@@ -12,30 +13,7 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
 
     abstract fun nextGenerationGiven(neighboursAlive: Int): Cell
 
-    fun potentialAliveNeighbours() = listOf(
-        topLeftNeighbour(),
-        topNeighbour(),
-        topRightNeighbour(),
-        rightNeighbour(),
-        bottomRightNeighbour(),
-        bottomNeighbour(),
-        bottomLeftNeighbour(),
-        leftNeighbour()
-    )
-
-    private fun topLeftNeighbour() = alive(previousColumn(), previousRow())
-    private fun topNeighbour() = alive(column, previousRow())
-    private fun topRightNeighbour() = alive(nextColumn(), previousRow())
-    private fun rightNeighbour() = alive(nextColumn(), row)
-    private fun bottomRightNeighbour() = alive(nextColumn(), nextRow())
-    private fun bottomNeighbour() = alive(column, nextRow())
-    private fun bottomLeftNeighbour() = alive(previousColumn(), nextRow())
-    private fun leftNeighbour() = alive(previousColumn(), row)
-
-    private fun previousColumn() = column - 1
-    private fun nextColumn() = column + 1
-    private fun previousRow() = row - 1
-    private fun nextRow() = row + 1
+    fun potentialAliveNeighbours() = Neighbours.ofCell(column, row).map { aliveFrom(it) }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
