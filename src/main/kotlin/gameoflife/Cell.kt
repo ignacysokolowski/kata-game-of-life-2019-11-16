@@ -50,6 +50,8 @@ private class AliveCell constructor(column: Int, row: Int) : Cell(column, row) {
 }
 
 private class DeadCell constructor(column: Int, row: Int) : Cell(column, row) {
-    override fun nextGenerationGiven(neighboursAlive: Int) = dead()
+    override fun nextGenerationGiven(neighboursAlive: Int): Cell {
+        return if (neighboursAlive == 3) alive() else dead()
+    }
     override fun toString() = "Cell.dead($column, $row)"
 }

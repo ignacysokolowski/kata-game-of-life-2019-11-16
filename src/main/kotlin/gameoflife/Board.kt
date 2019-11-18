@@ -4,18 +4,7 @@ class Board(private val cells: Cells) {
 
     constructor(vararg cells: Cell) : this(Cells(cells.asList()))
 
-    fun nextGeneration(): Board {
-        if (cells == Cells(listOf(
-                Cell.alive(0, 0), Cell.alive(1, 0),
-                Cell.alive(0, 1), Cell.dead(1, 1)
-            ))) {
-            return Board(Cells(listOf(
-                Cell.alive(0, 0), Cell.alive(1, 0),
-                Cell.alive(0, 1), Cell.alive(1, 1)
-            )))
-        }
-        return Board(cells.map { it.nextGenerationGiven(aliveNeighboursOf(it)) })
-    }
+    fun nextGeneration() = Board(cells.map { it.nextGenerationGiven(aliveNeighboursOf(it)) })
 
     private fun aliveNeighboursOf(it: Cell) = Cells(it.potentialAliveNeighbours()).onlyExistingIn(cells).size()
 
