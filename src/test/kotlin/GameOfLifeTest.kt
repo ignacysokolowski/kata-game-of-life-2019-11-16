@@ -40,7 +40,7 @@ class GameOfLifeTest {
         ))
     }
 
-    @Test fun `dead cell with two neighbours alive stays dead`() {
+    @Test fun `dead cells with two neighbours alive stay dead`() {
         assertEvolution(board(
             { O; X; O }
         ), board(
