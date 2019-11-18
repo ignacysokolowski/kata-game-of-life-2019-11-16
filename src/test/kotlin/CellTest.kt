@@ -42,23 +42,23 @@ class CellTest {
         assertThat(Cell.dead(2, 1), not(IsEqual(Cell.dead(2, 2))))
     }
 
-    @Test fun `has potential alive neighbours on the left and right, top and bottom`() {
+    @Test fun `has potential alive neighbours on top, right, bottom and left`() {
         assertThat(
             Cell.alive(2, 2).potentialAliveNeighbours(),
             IsEqual(listOf(
-                Cell.alive(1, 2),
-                Cell.alive(3, 2),
                 Cell.alive(2, 1),
-                Cell.alive(2, 3)
+                Cell.alive(3, 2),
+                Cell.alive(2, 3),
+                Cell.alive(1, 2)
             ))
         )
         assertThat(
             Cell.alive(3, 3).potentialAliveNeighbours(),
             IsEqual(listOf(
-                Cell.alive(2, 3),
-                Cell.alive(4, 3),
                 Cell.alive(3, 2),
-                Cell.alive(3, 4)
+                Cell.alive(4, 3),
+                Cell.alive(3, 4),
+                Cell.alive(2, 3)
             ))
         )
     }
