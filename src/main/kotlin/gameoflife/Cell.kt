@@ -13,15 +13,23 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
     abstract fun nextGenerationGiven(neighboursAlive: Int): Cell
 
     fun potentialAliveNeighbours() = listOf(
+        topLeftNeighbour(),
         topNeighbour(),
+        topRightNeighbour(),
         rightNeighbour(),
+        bottomRightNeighbour(),
         bottomNeighbour(),
+        bottomLeftNeighbour(),
         leftNeighbour()
     )
 
+    private fun topLeftNeighbour() = alive(column - 1, row - 1)
     private fun topNeighbour() = alive(column, row - 1)
+    private fun topRightNeighbour() = alive(column + 1, row - 1)
     private fun rightNeighbour() = alive(column + 1, row)
+    private fun bottomRightNeighbour() = alive(column + 1, row + 1)
     private fun bottomNeighbour() = alive(column, row + 1)
+    private fun bottomLeftNeighbour() = alive(column - 1, row + 1)
     private fun leftNeighbour() = alive(column - 1, row)
 
     override fun equals(other: Any?): Boolean {
