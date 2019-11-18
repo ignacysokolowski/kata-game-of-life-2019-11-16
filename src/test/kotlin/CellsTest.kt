@@ -10,10 +10,10 @@ class CellsTest {
     @Test fun `equal if has the some cells as the other one`() {
         assertThat(
             Cells(listOf(
-                Cell(1, 2).alive(), Cell(2, 3).dead(), Cell(4, 4).alive()
+                Cell.alive(1, 2), Cell.dead(2, 3), Cell.alive(4, 4)
             )),
             IsEqual(Cells(listOf(
-                Cell(1, 2).alive(), Cell(2, 3).dead(), Cell(4, 4).alive()
+                Cell.alive(1, 2), Cell.dead(2, 3), Cell.alive(4, 4)
             )))
         )
     }
@@ -21,10 +21,10 @@ class CellsTest {
     @Test fun `unequal if other cells are in a different state`() {
         assertThat(
             Cells(listOf(
-                Cell(1, 2).alive(), Cell(2, 3).dead(), Cell(4, 4).alive()
+                Cell.alive(1, 2), Cell.dead(2, 3), Cell.alive(4, 4)
             )),
             not(IsEqual(Cells(listOf(
-                Cell(1, 2).alive(), Cell(2, 3).alive(), Cell(4, 4).dead()
+                Cell.alive(1, 2), Cell.alive(2, 3), Cell.dead(4, 4)
             ))))
         )
     }
@@ -32,12 +32,21 @@ class CellsTest {
     @Test fun `finds cells only existing in other cells`() {
         assertThat(
             Cells(listOf(
-                Cell(1, 2), Cell(2, 2), Cell(3, 2), Cell(4, 2), Cell(5, 2).alive(), Cell(6, 2)
+                Cell.alive(1, 2),
+                Cell.alive(2, 2),
+                Cell.alive(3, 2),
+                Cell.alive(4, 2),
+                Cell.alive(5, 2),
+                Cell.alive(6, 2)
             )).onlyExistingIn(Cells(listOf(
-                Cell(2, 2), Cell(4, 2), Cell(5, 2).dead(), Cell(6, 3)
+                Cell.alive(2, 2),
+                Cell.alive(4, 2),
+                Cell.dead(5, 2),
+                Cell.alive(6, 3)
             ))),
             IsEqual(Cells(listOf(
-                Cell(2, 2), Cell(4, 2)
+                Cell.alive(2, 2),
+                Cell.alive(4, 2)
             )))
         )
     }
@@ -45,10 +54,10 @@ class CellsTest {
     @Test fun `maps each of the cells with given transformation`() {
         assertThat(
             Cells(listOf(
-                Cell(1, 2).alive(), Cell(2, 2).alive(), Cell(3, 2).alive()
+                Cell.alive(1, 2), Cell.alive(2, 2), Cell.alive(3, 2)
             )).map { it.dead() },
             IsEqual(Cells(listOf(
-                Cell(1, 2).dead(), Cell(2, 2).dead(), Cell(3, 2).dead()
+                Cell.dead(1, 2), Cell.dead(2, 2), Cell.dead(3, 2)
             )))
         )
     }
