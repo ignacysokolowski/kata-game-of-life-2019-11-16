@@ -44,7 +44,7 @@ abstract class Cell(protected val column: Int, protected val row: Int) {
 
 private class AliveCell constructor(column: Int, row: Int) : Cell(column, row) {
     override fun nextGenerationGiven(neighboursAlive: Int): Cell {
-        return if (neighboursAlive == 2 || neighboursAlive == 3) alive() else dead()
+        return if (neighboursAlive in listOf(2, 3)) alive() else dead()
     }
     override fun toString() = "Cell.alive($column, $row)"
 }
