@@ -83,6 +83,10 @@ class CellTest {
         assertThat(Cell.alive(1, 2).nextGenerationGiven(neighboursAlive = 2), IsEqual(Cell.alive(1, 2)))
     }
 
+    @Test fun `alive cell survives with three alive neighbours`() {
+        assertThat(Cell.alive(1, 2).nextGenerationGiven(neighboursAlive = 3), IsEqual(Cell.alive(1, 2)))
+    }
+
     @Test fun `dead cell stays dead without alive neighbours`() {
         assertThat(Cell.dead(1, 2).nextGenerationGiven(neighboursAlive = 0), IsEqual(Cell.dead(1, 2)))
     }
