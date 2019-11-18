@@ -1,5 +1,7 @@
 import gameoflife.Board
 import gameoflife.Cell
+import gameoflife.Column
+import gameoflife.Row
 import gameoflife.dsl.board
 import org.hamcrest.core.IsEqual
 import org.junit.Assert.assertThat
@@ -19,9 +21,9 @@ class BoardDSLTest {
                 { O; O; X }
             ),
             IsEqual(Board(
-                Cell.alive(0, 0), Cell.dead(1, 0), Cell.alive(2, 0),
-                Cell.dead(0, 1), Cell.alive(1, 1), Cell.dead(2, 1),
-                Cell.alive(0, 2), Cell.alive(1, 2), Cell.dead(2, 2)
+                Cell.alive(Column(0), Row(0)), Cell.dead(Column(1), Row(0)), Cell.alive(Column(2), Row(0)),
+                Cell.dead(Column(0), Row(1)), Cell.alive(Column(1), Row(1)), Cell.dead(Column(2), Row(1)),
+                Cell.alive(Column(0), Row(2)), Cell.alive(Column(1), Row(2)), Cell.dead(Column(2), Row(2))
             ))
         )
     }
