@@ -24,9 +24,8 @@ class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
     val X
         get() = addCell(Cell.dead(column, row))
 
-    private fun addCell(cell: Cell): BoardBuilder {
+    private fun addCell(cell: Cell) {
         cells.add(cell)
         column += 1
-        return this
     }
 }
