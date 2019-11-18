@@ -66,16 +66,6 @@ class GameOfLifeTest {
         ))
     }
 
-    @Test fun `dead cell with three neighbours alive comes to life`() {
-        assertEvolution(board(
-            { O; O },
-            { O; X }
-        ), board(
-            { O; O },
-            { O; O }
-        ))
-    }
-
     private fun assertEvolution(currentGeneration: Board, nextGeneration: Board) {
         assertThat(currentGeneration.nextGeneration(), IsEqual(nextGeneration))
     }
