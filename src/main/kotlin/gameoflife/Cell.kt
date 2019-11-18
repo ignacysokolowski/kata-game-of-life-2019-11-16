@@ -1,23 +1,16 @@
 package gameoflife
 
-class Cell private constructor(
-    private val column: Int,
-    private val row: Int,
-    private val alive: Boolean
-) {
+abstract class Cell(protected val column: Int, protected val row: Int) {
 
     companion object {
-        fun alive(column: Int, row: Int) = Cell(column, row, alive = true)
-        fun dead(column: Int, row: Int) = Cell(column, row, alive = false)
+        fun alive(column: Int, row: Int): Cell = AliveCell(column, row)
+        fun dead(column: Int, row: Int): Cell = DeadCell(column, row)
     }
 
     fun alive() = alive(column, row)
     fun dead() = dead(column, row)
 
-    fun nextGenerationGivenNeighbours(neighbours: Int): Cell {
-        if (!alive) return dead()
-        return if (neighbours == 2) alive() else dead()
-    }
+    abstract fun nextGenerationGivenNeighbours(neighbours: Int): Cell
 
     fun potentialAliveNeighbours() = listOf(
         leftNeighbour(),
@@ -31,13 +24,24 @@ class Cell private constructor(
     private fun topNeighbour() = alive(column, row - 1)
     private fun bottomNeighbour() = alive(column, row + 1)
 
-    override fun toString() = "Cell.${if (alive) "alive" else "dead"}($column, $row)"
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Cell) return false
-        return other.column == column && other.row == row && other.alive == alive
+        if (javaClass != other.javaClass) return false
+        return other.column == column && other.row == row
     }
 
     override fun hashCode() = javaClass.hashCode()
+}
+
+private class AliveCell constructor(column: Int, row: Int) : Cell(column, row) {
+    override fun nextGenerationGivenNeighbours(neighbours: Int): Cell {
+        return if (neighbours == 2) alive() else dead()
+    }
+    override fun toString() = "Cell.alive($column, $row)"
+}
+
+private class DeadCell constructor(column: Int, row: Int) : Cell(column, row) {
+    override fun nextGenerationGivenNeighbours(neighbours: Int) = dead()
+    override fun toString() = "Cell.dead($column, $row)"
 }
