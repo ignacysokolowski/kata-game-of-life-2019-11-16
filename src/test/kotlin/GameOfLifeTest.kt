@@ -40,6 +40,16 @@ class GameOfLifeTest {
         ))
     }
 
+    @Test fun `alive cells with three neighbours stay alive, dead cells with three neighbours alive come to live`() {
+        assertEvolution(board(
+            { O; O },
+            { O; X }
+        ), board(
+            { O; O },
+            { O; O }
+        ))
+    }
+
     @Test fun `cells with less than two neighbours alive die`() {
         assertEvolution(board(
             { X; O; O; X }
