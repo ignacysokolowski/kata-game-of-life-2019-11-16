@@ -3,11 +3,13 @@ package gameoflife.dsl
 import gameoflife.Board
 import gameoflife.Cell
 import gameoflife.Cells
+import gameoflife.Column
+import gameoflife.Row
 
 class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
     private var cells = mutableSetOf<Cell>()
-    private var row = 0
-    private var column = 0
+    private var row = Row(0)
+    private var column = Column(0)
 
     fun build(): Board {
         for (init in inits) {
@@ -18,8 +20,8 @@ class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
     }
 
     private fun nextRow() {
-        row += 1
-        column = 0
+        row = row.bottom()
+        column = Column(0)
     }
 
     val O
@@ -30,6 +32,6 @@ class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
 
     private fun addCell(cell: Cell) {
         cells.add(cell)
-        column += 1
+        column = column.right()
     }
 }
