@@ -58,6 +58,22 @@ class GameOfLifeTest {
         ))
     }
 
+    @Test fun `cells with more than three alive neighbours are dead in the next generation`() {
+        assertEvolution(board(
+            { O; O; O },
+            { O; O; X },
+            { X; X; X },
+            { O; X; X },
+            { O; O; O }
+        ), board(
+            { O; X; O },
+            { O; X; O },
+            { O; O; X },
+            { O; X; X },
+            { O; O; X }
+        ))
+    }
+
     private fun assertEvolution(currentGeneration: Board, nextGeneration: Board) {
         assertThat(currentGeneration.nextGeneration(), IsEqual(nextGeneration))
     }
