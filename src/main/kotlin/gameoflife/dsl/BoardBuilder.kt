@@ -20,7 +20,7 @@ class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
     }
 
     private fun nextRow() {
-        row = row.bottom()
+        row = row.next()
         column = Column(0)
     }
 
@@ -32,6 +32,6 @@ class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
 
     private fun addCell(cell: Cell) {
         cells.add(cell)
-        column = column.right()
+        column = column.next()
     }
 }
