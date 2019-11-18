@@ -11,40 +11,37 @@ import org.junit.Test
 class BoardTest {
     @Test
     fun `two equal boards`() {
-        Assert.assertThat(Board(Cells(setOf(
+        Assert.assertThat(Board(Cells(
             Cell.alive(Column(1), Row(2)), Cell.dead(Column(2), Row(2))
-        ))), IsEqual(Board(Cells(setOf(
+        )), IsEqual(Board(Cells(
             Cell.alive(Column(1), Row(2)), Cell.dead(Column(2), Row(2))
-        )))))
+        ))))
     }
 
     @Test
     fun `two boards with different cell states`() {
-        Assert.assertThat(Board(Cells(setOf(
+        Assert.assertThat(Board(Cells(
             Cell.alive(Column(1), Row(2)), Cell.dead(Column(2), Row(2))
-        ))), not(IsEqual(Board(Cells(setOf(
+        )), not(IsEqual(Board(Cells(
             Cell.alive(Column(1), Row(2)), Cell.alive(Column(2), Row(2))
         )))))
-        )
     }
 
     @Test
     fun `two boards with different cell columns`() {
-        Assert.assertThat(Board(Cells(setOf(
+        Assert.assertThat(Board(Cells(
             Cell.alive(Column(1), Row(2)), Cell.dead(Column(2), Row(2))
-        ))), not(IsEqual(Board(Cells(setOf(
+        )), not(IsEqual(Board(Cells(
             Cell.alive(Column(1), Row(2)), Cell.dead(Column(3), Row(2))
         )))))
-        )
     }
 
     @Test
     fun `two boards with different cell rows`() {
-        Assert.assertThat(Board(Cells(setOf(
+        Assert.assertThat(Board(Cells(
             Cell.alive(Column(1), Row(2)), Cell.dead(Column(2), Row(2))
-        ))), not(IsEqual(Board(Cells(setOf(
+        )), not(IsEqual(Board(Cells(
             Cell.alive(Column(1), Row(2)), Cell.dead(Column(2), Row(3))
         )))))
-        )
     }
 }

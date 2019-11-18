@@ -11,68 +11,68 @@ class CellsTest {
 
     @Test fun `equal if has the some cells as the other one`() {
         assertThat(
-            Cells(setOf(
+            Cells(
                 Cell.alive(Column(1), Row(2)),
                 Cell.dead(Column(2), Row(3)),
                 Cell.alive(Column(4), Row(4))
-            )),
-            IsEqual(Cells(setOf(
+            ),
+            IsEqual(Cells(
                 Cell.alive(Column(1), Row(2)),
                 Cell.dead(Column(2), Row(3)),
                 Cell.alive(Column(4), Row(4))
-            )))
+            ))
         )
     }
 
     @Test fun `unequal if other cells are in a different state`() {
         assertThat(
-            Cells(setOf(
+            Cells(
                 Cell.alive(Column(1), Row(2)),
                 Cell.dead(Column(2), Row(3)),
                 Cell.alive(Column(4), Row(4))
-            )),
-            not(IsEqual(Cells(setOf(
+            ),
+            not(IsEqual(Cells(
                 Cell.alive(Column(1), Row(2)),
                 Cell.alive(Column(2), Row(3)),
                 Cell.dead(Column(4), Row(4))
-            ))))
+            )))
         )
     }
 
     @Test fun `finds cells only existing in other cells`() {
         assertThat(
-            Cells(setOf(
+            Cells(
                 Cell.alive(Column(1), Row(2)),
                 Cell.alive(Column(2), Row(2)),
                 Cell.alive(Column(3), Row(2)),
                 Cell.alive(Column(4), Row(2)),
                 Cell.alive(Column(5), Row(2)),
                 Cell.alive(Column(6), Row(2))
-            )).onlyExistingIn(Cells(setOf(
+            ).onlyExistingIn(Cells(
                 Cell.alive(Column(2), Row(2)),
                 Cell.alive(Column(4), Row(2)),
                 Cell.dead(Column(5), Row(2)),
                 Cell.alive(Column(6), Row(3))
-            ))),
-            IsEqual(Cells(setOf(
+            )),
+            IsEqual(Cells(
                 Cell.alive(Column(2), Row(2)),
                 Cell.alive(Column(4), Row(2))
-            )))
+            ))
         )
     }
 
     @Test fun `maps each of the cells with given transformation`() {
         assertThat(
-            Cells(setOf(
+            Cells(
                 Cell.alive(Column(1), Row(2)),
                 Cell.alive(Column(2), Row(2)),
                 Cell.alive(Column(3), Row(2))
-            )).map { it.dead() },
-            IsEqual(Cells(setOf(
+            ).map { it.dead() },
+            IsEqual(Cells(
                 Cell.dead(Column(1), Row(2)),
                 Cell.dead(Column(2), Row(2)),
                 Cell.dead(Column(3), Row(2))
-            )))
+            ))
         )
     }
 }
