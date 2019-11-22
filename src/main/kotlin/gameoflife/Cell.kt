@@ -1,6 +1,6 @@
 package gameoflife
 
-abstract class Cell protected constructor(protected val coordinates: Coordinates) {
+abstract class Cell(protected val coordinates: Coordinates) {
 
     companion object {
         fun alive(column: Column, row: Row): Cell = aliveAt(Coordinates(column, row))
