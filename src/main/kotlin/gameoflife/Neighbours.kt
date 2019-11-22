@@ -1,8 +1,13 @@
 package gameoflife
 
-data class Neighbour(val column: Column, val row: Row)
+data class Neighbour(val column: Column, val row: Row) {
+    constructor(coordinates: Coordinates) : this(coordinates.column, coordinates.row)
+}
 
-class Neighbours private constructor(private val column: Column, private val row: Row) {
+class Neighbours private constructor(column: Column, row: Row) {
+
+    private val coordinates = Coordinates(column, row)
+
     companion object {
         fun ofCell(column: Column, row: Row) = Neighbours(column, row)
     }
@@ -20,13 +25,13 @@ class Neighbours private constructor(private val column: Column, private val row
         bottomRight()
     )
 
-    private fun topLeft() = Neighbour(column.left(), row.top())
-    private fun top() = Neighbour(column, row.top())
-    private fun topRight() = Neighbour(column.right(), row.top())
-    private fun left() = Neighbour(column.left(), row)
-    private fun right() = Neighbour(column.right(), row)
-    private fun bottomLeft() = Neighbour(column.left(), row.bottom())
-    private fun bottom() = Neighbour(column, row.bottom())
-    private fun bottomRight() = Neighbour(column.right(), row.bottom())
+    private fun topLeft() = Neighbour(coordinates.movedLeft().movedTop())
+    private fun top() = Neighbour(coordinates.movedTop())
+    private fun topRight() = Neighbour(coordinates.movedRight().movedTop())
+    private fun left() = Neighbour(coordinates.movedLeft())
+    private fun right() = Neighbour(coordinates.movedRight())
+    private fun bottomLeft() = Neighbour(coordinates.movedLeft().movedBottom())
+    private fun bottom() = Neighbour(coordinates.movedBottom())
+    private fun bottomRight() = Neighbour(coordinates.movedRight().movedBottom())
 
 }
