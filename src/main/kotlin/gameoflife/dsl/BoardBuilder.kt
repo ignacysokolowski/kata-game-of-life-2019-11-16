@@ -4,12 +4,12 @@ import gameoflife.Board
 import gameoflife.Cell
 import gameoflife.Cells
 import gameoflife.Column
+import gameoflife.Coordinates
 import gameoflife.Row
 
 class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
     private var cells = mutableSetOf<Cell>()
-    private var row = Row(0)
-    private var column = Column(0)
+    private var coordinates = Coordinates(Column(0), Row(0))
 
     fun build(): Board {
         for (init in inits) {
@@ -20,18 +20,17 @@ class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
     }
 
     private fun nextRow() {
-        row = row.next()
-        column = Column(0)
+        coordinates = coordinates.movedDown().atColumn(Column(0))
     }
 
     val O
-        get() = addCell(Cell.alive(column, row))
+        get() = addCell(Cell.aliveAt(coordinates))
 
     val X
-        get() = addCell(Cell.dead(column, row))
+        get() = addCell(Cell.deadAt(coordinates))
 
     private fun addCell(cell: Cell) {
         cells.add(cell)
-        column = column.next()
+        coordinates = coordinates.movedRight()
     }
 }
