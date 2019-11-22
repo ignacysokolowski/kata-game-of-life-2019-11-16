@@ -7,7 +7,7 @@ data class Neighbour(val column: Column, val row: Row) {
 class Neighbours private constructor(private val coordinates: Coordinates) {
 
     companion object {
-        fun ofCell(column: Column, row: Row) = Neighbours(Coordinates(column, row))
+        fun ofCellAt(coordinates: Coordinates) = Neighbours(coordinates)
     }
 
     fun <T> map(transform: (Neighbour) -> T) = all().map(transform).toSet()
