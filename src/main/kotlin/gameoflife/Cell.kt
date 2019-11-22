@@ -7,13 +7,15 @@ abstract class Cell private constructor(private val column: Column, private val 
     protected val coordinates = Coordinates(column, row)
 
     companion object {
-        fun alive(column: Column, row: Row): Cell = AliveCell(Coordinates(column, row))
-        fun dead(column: Column, row: Row): Cell = DeadCell(Coordinates(column, row))
+        fun alive(column: Column, row: Row): Cell = alive(Coordinates(column, row))
+        private fun alive(coordinates: Coordinates): Cell = AliveCell(coordinates)
+        fun dead(column: Column, row: Row): Cell = dead(Coordinates(column, row))
+        private fun dead(coordinates: Coordinates): Cell = DeadCell(coordinates)
         private fun aliveFrom(neighbour: Neighbour) = alive(neighbour.column, neighbour.row)
     }
 
-    fun alive() = alive(column, row)
-    fun dead() = dead(column, row)
+    fun alive() = alive(coordinates)
+    fun dead() = dead(coordinates)
 
     fun nextGenerationGiven(neighboursAlive: Int): Cell {
         return if (willLiveInNextGenerationGiven(neighboursAlive)) alive() else dead()
