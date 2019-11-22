@@ -7,7 +7,6 @@ abstract class Cell protected constructor(protected val coordinates: Coordinates
         private fun alive(coordinates: Coordinates): Cell = AliveCell(coordinates)
         fun dead(column: Column, row: Row): Cell = dead(Coordinates(column, row))
         private fun dead(coordinates: Coordinates): Cell = DeadCell(coordinates)
-        private fun aliveFrom(neighbour: Neighbour) = alive(neighbour.coordinates)
     }
 
     fun alive() = alive(coordinates)
@@ -19,7 +18,7 @@ abstract class Cell protected constructor(protected val coordinates: Coordinates
 
     protected abstract fun willLiveInNextGenerationGiven(neighboursAlive: Int): Boolean
 
-    fun potentialAliveNeighbours() = Neighbours.of(coordinates).map { aliveFrom(it) }
+    fun potentialAliveNeighbours() = Neighbours.of(coordinates).map { alive(it) }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

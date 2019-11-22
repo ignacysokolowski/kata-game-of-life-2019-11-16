@@ -1,14 +1,12 @@
 package gameoflife
 
-data class Neighbour(val coordinates: Coordinates)
-
 class Neighbours private constructor(private val coordinates: Coordinates) {
 
     companion object {
         fun of(coordinates: Coordinates) = Neighbours(coordinates)
     }
 
-    fun <T> map(transform: (Neighbour) -> T) = all().map(transform).toSet()
+    fun <T> map(transform: (Coordinates) -> T) = all().map(transform).toSet()
 
     private fun all() = setOf(
         topLeft(),
@@ -21,13 +19,13 @@ class Neighbours private constructor(private val coordinates: Coordinates) {
         bottomRight()
     )
 
-    private fun topLeft() = Neighbour(coordinates.movedLeft().movedUp())
-    private fun top() = Neighbour(coordinates.movedUp())
-    private fun topRight() = Neighbour(coordinates.movedRight().movedUp())
-    private fun left() = Neighbour(coordinates.movedLeft())
-    private fun right() = Neighbour(coordinates.movedRight())
-    private fun bottomLeft() = Neighbour(coordinates.movedLeft().movedDown())
-    private fun bottom() = Neighbour(coordinates.movedDown())
-    private fun bottomRight() = Neighbour(coordinates.movedRight().movedDown())
+    private fun topLeft() = coordinates.movedLeft().movedUp()
+    private fun top() = coordinates.movedUp()
+    private fun topRight() = coordinates.movedRight().movedUp()
+    private fun left() = coordinates.movedLeft()
+    private fun right() = coordinates.movedRight()
+    private fun bottomLeft() = coordinates.movedLeft().movedDown()
+    private fun bottom() = coordinates.movedDown()
+    private fun bottomRight() = coordinates.movedRight().movedDown()
 
 }
