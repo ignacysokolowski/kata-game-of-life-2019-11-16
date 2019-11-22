@@ -4,12 +4,10 @@ data class Neighbour(val column: Column, val row: Row) {
     constructor(coordinates: Coordinates) : this(coordinates.column, coordinates.row)
 }
 
-class Neighbours private constructor(column: Column, row: Row) {
-
-    private val coordinates = Coordinates(column, row)
+class Neighbours private constructor(private val coordinates: Coordinates) {
 
     companion object {
-        fun ofCell(column: Column, row: Row) = Neighbours(column, row)
+        fun ofCell(column: Column, row: Row) = Neighbours(Coordinates(column, row))
     }
 
     fun <T> map(transform: (Neighbour) -> T) = all().map(transform).toSet()
