@@ -29,16 +29,16 @@ class CoordinatesTest {
         )
     }
 
-    @Test fun `can be moved one row to the top`() {
+    @Test fun `can be moved one row up`() {
         assertThat(
-            Coordinates(Column(2), Row(5)).movedTop(),
+            Coordinates(Column(2), Row(5)).movedUp(),
             IsEqual(Coordinates(Column(2), Row(4)))
         )
     }
 
-    @Test fun `can be moved one row to the bottom`() {
+    @Test fun `can be moved one row down`() {
         assertThat(
-            Coordinates(Column(2), Row(5)).movedBottom(),
+            Coordinates(Column(2), Row(5)).movedDown(),
             IsEqual(Coordinates(Column(2), Row(6)))
         )
     }
