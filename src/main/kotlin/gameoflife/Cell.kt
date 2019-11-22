@@ -3,14 +3,14 @@ package gameoflife
 abstract class Cell protected constructor(protected val coordinates: Coordinates) {
 
     companion object {
-        fun alive(column: Column, row: Row): Cell = alive(Coordinates(column, row))
-        private fun alive(coordinates: Coordinates): Cell = AliveCell(coordinates)
-        fun dead(column: Column, row: Row): Cell = dead(Coordinates(column, row))
-        private fun dead(coordinates: Coordinates): Cell = DeadCell(coordinates)
+        fun alive(column: Column, row: Row): Cell = aliveAt(Coordinates(column, row))
+        private fun aliveAt(coordinates: Coordinates): Cell = AliveCell(coordinates)
+        fun dead(column: Column, row: Row): Cell = deadAt(Coordinates(column, row))
+        private fun deadAt(coordinates: Coordinates): Cell = DeadCell(coordinates)
     }
 
-    fun alive() = alive(coordinates)
-    fun dead() = dead(coordinates)
+    fun alive() = aliveAt(coordinates)
+    fun dead() = deadAt(coordinates)
 
     fun nextGenerationGiven(neighboursAlive: Int): Cell {
         return if (willLiveInNextGenerationGiven(neighboursAlive)) alive() else dead()
@@ -18,7 +18,7 @@ abstract class Cell protected constructor(protected val coordinates: Coordinates
 
     protected abstract fun willLiveInNextGenerationGiven(neighboursAlive: Int): Boolean
 
-    fun potentialAliveNeighbours() = Neighbours.of(coordinates).map { alive(it) }
+    fun potentialAliveNeighbours() = Neighbours.of(coordinates).map { aliveAt(it) }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
