@@ -12,9 +12,8 @@ abstract class Cell(protected val coordinates: Coordinates) {
     fun alive() = aliveAt(coordinates)
     fun dead() = deadAt(coordinates)
 
-    fun nextGenerationGiven(neighboursAlive: Int): Cell {
-        return if (willLiveInNextGenerationGiven(neighboursAlive)) alive() else dead()
-    }
+    fun nextGenerationGiven(neighboursAlive: Int) =
+        if (willLiveInNextGenerationGiven(neighboursAlive)) alive() else dead()
 
     protected abstract fun willLiveInNextGenerationGiven(neighboursAlive: Int): Boolean
 
