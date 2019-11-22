@@ -7,7 +7,7 @@ abstract class Cell protected constructor(protected val coordinates: Coordinates
         private fun alive(coordinates: Coordinates): Cell = AliveCell(coordinates)
         fun dead(column: Column, row: Row): Cell = dead(Coordinates(column, row))
         private fun dead(coordinates: Coordinates): Cell = DeadCell(coordinates)
-        private fun aliveFrom(neighbour: Neighbour) = alive(neighbour.column, neighbour.row)
+        private fun aliveFrom(neighbour: Neighbour) = alive(neighbour.coordinates)
     }
 
     fun alive() = alive(coordinates)

@@ -1,8 +1,6 @@
 package gameoflife
 
-data class Neighbour(val column: Column, val row: Row) {
-    constructor(coordinates: Coordinates) : this(coordinates.column, coordinates.row)
-}
+data class Neighbour(val coordinates: Coordinates)
 
 class Neighbours private constructor(private val coordinates: Coordinates) {
 
