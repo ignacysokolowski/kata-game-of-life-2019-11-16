@@ -5,4 +5,5 @@ data class Coordinates(private val column: Column, private val row: Row) {
     fun movedLeft() = Coordinates(column.left(), row)
     fun movedUp() = Coordinates(column, row.top())
     fun movedDown() = Coordinates(column, row.bottom())
+    fun atColumn(column: Column) = Coordinates(column, row)
 }

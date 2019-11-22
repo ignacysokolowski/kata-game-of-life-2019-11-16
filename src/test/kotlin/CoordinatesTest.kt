@@ -42,4 +42,11 @@ class CoordinatesTest {
             IsEqual(Coordinates(Column(2), Row(6)))
         )
     }
+
+    @Test fun `can be moved to a specific column`() {
+        assertThat(
+            Coordinates(Column(2), Row(5)).atColumn(Column(1)),
+            IsEqual(Coordinates(Column(1), Row(5)))
+        )
+    }
 }
