@@ -5,7 +5,7 @@ data class Neighbour(val coordinates: Coordinates)
 class Neighbours private constructor(private val coordinates: Coordinates) {
 
     companion object {
-        fun ofCellAt(coordinates: Coordinates) = Neighbours(coordinates)
+        fun of(coordinates: Coordinates) = Neighbours(coordinates)
     }
 
     fun <T> map(transform: (Neighbour) -> T) = all().map(transform).toSet()

@@ -19,7 +19,7 @@ abstract class Cell protected constructor(protected val coordinates: Coordinates
 
     protected abstract fun willLiveInNextGenerationGiven(neighboursAlive: Int): Boolean
 
-    fun potentialAliveNeighbours() = Neighbours.ofCellAt(coordinates).map { aliveFrom(it) }
+    fun potentialAliveNeighbours() = Neighbours.of(coordinates).map { aliveFrom(it) }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
