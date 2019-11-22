@@ -1,12 +1,14 @@
 package gameoflife
 
-abstract class Cell(private val column: Column, private val row: Row) {
+abstract class Cell private constructor(private val column: Column, private val row: Row) {
+
+    protected constructor(coordinates: Coordinates) : this(coordinates.column, coordinates.row)
 
     protected val coordinates = Coordinates(column, row)
 
     companion object {
-        fun alive(column: Column, row: Row): Cell = AliveCell(column, row)
-        fun dead(column: Column, row: Row): Cell = DeadCell(column, row)
+        fun alive(column: Column, row: Row): Cell = AliveCell(Coordinates(column, row))
+        fun dead(column: Column, row: Row): Cell = DeadCell(Coordinates(column, row))
         private fun aliveFrom(neighbour: Neighbour) = alive(neighbour.column, neighbour.row)
     }
 
@@ -31,12 +33,12 @@ abstract class Cell(private val column: Column, private val row: Row) {
     override fun hashCode() = javaClass.hashCode()
 }
 
-private class AliveCell constructor(column: Column, row: Row) : Cell(column, row) {
+private class AliveCell constructor(coordinates: Coordinates) : Cell(coordinates) {
     override fun willLiveInNextGenerationGiven(neighboursAlive: Int) = neighboursAlive in setOf(2, 3)
     override fun toString() = "Cell.alive($coordinates.column, $coordinates.row)"
 }
 
-private class DeadCell constructor(column: Column, row: Row) : Cell(column, row) {
+private class DeadCell constructor(coordinates: Coordinates) : Cell(coordinates) {
     override fun willLiveInNextGenerationGiven(neighboursAlive: Int) = neighboursAlive == 3
     override fun toString() = "Cell.dead($coordinates.column, $coordinates.row)"
 }
