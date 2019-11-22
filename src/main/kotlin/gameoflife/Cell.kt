@@ -1,8 +1,8 @@
 package gameoflife
 
-abstract class Cell(protected val column: Column, protected val row: Row) {
+abstract class Cell(private val column: Column, private val row: Row) {
 
-    private val coordinates = Coordinates(column, row)
+    protected val coordinates = Coordinates(column, row)
 
     companion object {
         fun alive(column: Column, row: Row): Cell = AliveCell(column, row)
@@ -33,10 +33,10 @@ abstract class Cell(protected val column: Column, protected val row: Row) {
 
 private class AliveCell constructor(column: Column, row: Row) : Cell(column, row) {
     override fun willLiveInNextGenerationGiven(neighboursAlive: Int) = neighboursAlive in setOf(2, 3)
-    override fun toString() = "Cell.alive($column, $row)"
+    override fun toString() = "Cell.alive($coordinates.column, $coordinates.row)"
 }
 
 private class DeadCell constructor(column: Column, row: Row) : Cell(column, row) {
     override fun willLiveInNextGenerationGiven(neighboursAlive: Int) = neighboursAlive == 3
-    override fun toString() = "Cell.dead($column, $row)"
+    override fun toString() = "Cell.dead($coordinates.column, $coordinates.row)"
 }
