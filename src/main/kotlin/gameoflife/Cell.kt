@@ -1,6 +1,6 @@
 package gameoflife
 
-abstract class Cell private constructor(private val column: Column, private val row: Row) {
+abstract class Cell private constructor(column: Column, row: Row) {
 
     protected constructor(coordinates: Coordinates) : this(coordinates.column, coordinates.row)
 
@@ -29,7 +29,7 @@ abstract class Cell private constructor(private val column: Column, private val 
         if (this === other) return true
         if (other !is Cell) return false
         if (javaClass != other.javaClass) return false
-        return other.column == column && other.row == row
+        return other.coordinates == this.coordinates
     }
 
     override fun hashCode() = javaClass.hashCode()
