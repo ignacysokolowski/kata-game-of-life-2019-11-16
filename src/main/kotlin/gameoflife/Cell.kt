@@ -4,9 +4,9 @@ abstract class Cell protected constructor(protected val coordinates: Coordinates
 
     companion object {
         fun alive(column: Column, row: Row): Cell = aliveAt(Coordinates(column, row))
-        private fun aliveAt(coordinates: Coordinates): Cell = AliveCell(coordinates)
+        fun aliveAt(coordinates: Coordinates): Cell = AliveCell(coordinates)
         fun dead(column: Column, row: Row): Cell = deadAt(Coordinates(column, row))
-        private fun deadAt(coordinates: Coordinates): Cell = DeadCell(coordinates)
+        fun deadAt(coordinates: Coordinates): Cell = DeadCell(coordinates)
     }
 
     fun alive() = aliveAt(coordinates)
@@ -32,10 +32,10 @@ abstract class Cell protected constructor(protected val coordinates: Coordinates
 
 private class AliveCell constructor(coordinates: Coordinates) : Cell(coordinates) {
     override fun willLiveInNextGenerationGiven(neighboursAlive: Int) = neighboursAlive in setOf(2, 3)
-    override fun toString() = "Cell.alive($coordinates.column, $coordinates.row)"
+    override fun toString() = "Cell.aliveAt($coordinates)"
 }
 
 private class DeadCell constructor(coordinates: Coordinates) : Cell(coordinates) {
     override fun willLiveInNextGenerationGiven(neighboursAlive: Int) = neighboursAlive == 3
-    override fun toString() = "Cell.dead($coordinates.column, $coordinates.row)"
+    override fun toString() = "Cell.deadAt($coordinates)"
 }
