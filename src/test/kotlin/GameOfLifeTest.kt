@@ -1,38 +1,38 @@
-import gameoflife.Board
-import gameoflife.dsl.board
+import gameoflife.Universe
+import gameoflife.dsl.universe
 import org.hamcrest.core.IsEqual
 import org.junit.Assert.assertThat
 import org.junit.Test
 
 class GameOfLifeTest {
 
-    @Test fun `empty board stays empty in the next generation`() {
-        assertEvolution(board(), board())
+    @Test fun `empty universe stays empty in the next generation`() {
+        assertEvolution(universe(), universe())
     }
 
-    @Test fun `all cells die in a board with a single cell`() {
-        assertEvolution(board(
+    @Test fun `all cells die in a universe with a single cell`() {
+        assertEvolution(universe(
             { O }
-        ), board(
+        ), universe(
             { X }
         ))
     }
 
     @Test fun `cells with less than two neighbours alive die`() {
-        assertEvolution(board(
+        assertEvolution(universe(
             { O; O; O; O }
-        ), board(
+        ), universe(
             { X; O; O; X }
         ))
     }
 
     @Test fun `cells with two vertical neighbours alive survive`() {
-        assertEvolution(board(
+        assertEvolution(universe(
             { O },
             { O },
             { O },
             { O }
-        ), board(
+        ), universe(
             { X },
             { O },
             { O },
@@ -41,31 +41,31 @@ class GameOfLifeTest {
     }
 
     @Test fun `dead cells with two neighbours alive stay dead`() {
-        assertEvolution(board(
+        assertEvolution(universe(
             { O; X; O }
-        ), board(
+        ), universe(
             { X; X; X }
         ))
     }
 
     @Test fun `cells with three neighbours alive are alive in the next generation`() {
-        assertEvolution(board(
+        assertEvolution(universe(
             { O; O; O },
             { X; O; X }
-        ), board(
+        ), universe(
             { O; O; O },
             { O; O; O }
         ))
     }
 
     @Test fun `cells with more than three alive neighbours are dead in the next generation`() {
-        assertEvolution(board(
+        assertEvolution(universe(
             { O; O; O },
             { O; O; X },
             { X; X; X },
             { O; X; X },
             { O; O; O }
-        ), board(
+        ), universe(
             { O; X; O },
             { O; X; O },
             { O; O; X },
@@ -75,12 +75,12 @@ class GameOfLifeTest {
     }
 
     @Test fun `block is a still life`() {
-        assertGenerations(board(
+        assertGenerations(universe(
             { X; X; X; X },
             { X; O; O; X },
             { X; O; O; X },
             { X; X; X; X }
-        ), board(
+        ), universe(
             { X; X; X; X },
             { X; O; O; X },
             { X; O; O; X },
@@ -89,19 +89,19 @@ class GameOfLifeTest {
     }
 
     @Test fun `blinker is an oscillator`() {
-        assertGenerations(board(
+        assertGenerations(universe(
             { X; X; X },
             { O; O; O },
             { X; X; X }
-        ), board(
+        ), universe(
             { X; O; X },
             { X; O; X },
             { X; O; X }
-        ), board(
+        ), universe(
             { X; X; X },
             { O; O; O },
             { X; X; X }
-        ), board(
+        ), universe(
             { X; O; X },
             { X; O; X },
             { X; O; X }
@@ -109,22 +109,22 @@ class GameOfLifeTest {
     }
 
     @Test fun `glider is a spaceship`() {
-        assertGenerations(board(
+        assertGenerations(universe(
             { X; O; X; X },
             { X; X; O; X },
             { O; O; O; X },
             { X; X; X; X }
-        ), board(
+        ), universe(
             { X; X; X; X },
             { O; X; O; X },
             { X; O; O; X },
             { X; O; X; X }
-        ), board(
+        ), universe(
             { X; X; X; X },
             { X; X; O; X },
             { O; X; O; X },
             { X; O; O; X }
-        ), board(
+        ), universe(
             { X; X; X; X },
             { X; O; X; X },
             { X; X; O; O },
@@ -132,12 +132,12 @@ class GameOfLifeTest {
         ))
     }
 
-    private fun assertEvolution(currentGeneration: Board, nextGeneration: Board) {
+    private fun assertEvolution(currentGeneration: Universe, nextGeneration: Universe) {
         assertThat(currentGeneration.nextGeneration(), IsEqual(nextGeneration))
     }
 
-    private fun assertGenerations(vararg generations: Board) {
-        var currentGeneration: Board? = null
+    private fun assertGenerations(vararg generations: Universe) {
+        var currentGeneration: Universe? = null
         for (nextGeneration in generations) {
             if (currentGeneration != null) {
                 assertEvolution(currentGeneration, nextGeneration)

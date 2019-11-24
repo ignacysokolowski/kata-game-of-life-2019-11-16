@@ -1,22 +1,22 @@
 package gameoflife.dsl
 
-import gameoflife.Board
+import gameoflife.Universe
 import gameoflife.Cell
 import gameoflife.Cells
 import gameoflife.Column
 import gameoflife.Coordinates
 import gameoflife.Row
 
-class BoardBuilder(private val inits: List<BoardBuilder.() -> Unit>) {
+class UniverseBuilder(private val inits: List<UniverseBuilder.() -> Unit>) {
     private var cells = mutableSetOf<Cell>()
     private var coordinates = Coordinates(Column(0), Row(0))
 
-    fun build(): Board {
+    fun build(): Universe {
         for (init in inits) {
             init()
             nextRow()
         }
-        return Board(Cells(cells))
+        return Universe(Cells(cells))
     }
 
     private fun nextRow() {
