@@ -1,6 +1,6 @@
 package gameoflife
 
-class Cells constructor(private val cells: Set<Cell>) {
+class Cells(private val cells: Set<Cell>) {
     constructor(vararg cells: Cell) : this(cells.toSet())
     private constructor(cells: List<Cell>) : this(cells.toSet())
 
