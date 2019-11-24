@@ -1,5 +1,6 @@
 import gameoflife.Board
 import gameoflife.Cell
+import gameoflife.Cells
 import gameoflife.Column
 import gameoflife.Row
 import gameoflife.dsl.board
@@ -10,7 +11,7 @@ import org.junit.Test
 class BoardDSLTest {
 
     @Test fun `creates an empty board`() {
-        assertThat(board(), IsEqual(Board()))
+        assertThat(board(), IsEqual(Board(Cells())))
     }
 
     @Test fun `creates a board with cells`() {
@@ -20,11 +21,11 @@ class BoardDSLTest {
                 { X; O; X },
                 { O; O; X }
             ),
-            IsEqual(Board(
+            IsEqual(Board(Cells(
                 Cell.alive(Column(0), Row(0)), Cell.dead(Column(1), Row(0)), Cell.alive(Column(2), Row(0)),
                 Cell.dead(Column(0), Row(1)), Cell.alive(Column(1), Row(1)), Cell.dead(Column(2), Row(1)),
                 Cell.alive(Column(0), Row(2)), Cell.alive(Column(1), Row(2)), Cell.dead(Column(2), Row(2))
-            ))
+            )))
         )
     }
 }
